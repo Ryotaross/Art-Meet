@@ -15,6 +15,10 @@ use Illuminate\Http\Request;
 
 Route::group(['middleware' => 'api'], function(){
     Route::get('meats', 'Api\MeatController@index');
+    Route::post('meat/create','Api\MeatController@create');
+    Route::post('meat/edit', 'Api\MeatController@edit');
+    Route::post('meat/update','Api\MeatController@update');
+    Route::post('meat/delete','Api\MeatController@delete');
 });
 
 /*
