@@ -1,7 +1,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Button } from '@material-ui/core'; //Buttonをインポート
+import { Button } from '@material-ui/core'; 
 
 function Example() {
     return (
@@ -10,9 +10,8 @@ function Example() {
                 <div className="col-md-8">
                     <div className="card">
                         <div className="card-header">React導入できたわな</div>
-
                         <div className="card-body">pages下に移動出来た？？</div>
-                        <Button color="secondary" variant="contained">ワイがMaterial-UIのボタンやな？？</Button>
+                        <Button color="secondary" variant="contained" href={`/`}>Homeに遷移ボタン</Button>
                     </div>
                 </div>
             </div>
@@ -21,8 +20,4 @@ function Example() {
 }
 
 export default Example;
-
-if (document.getElementById('app')) {
-    ReactDOM.render(<Example />, document.getElementById('app'));
-}
 
