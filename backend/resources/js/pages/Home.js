@@ -1,14 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Button, Card } from '@material-ui/core';
+import '../style/common.css'
+import Index from '../components/Index';
 
 function Home() {
     return (
-        <div className="container">
-            <Card>
-                <Button color="primary" variant="contained"　href={`/example`}>Exampleに遷移</Button>
-            </Card>
-        </div>
+      <>
+        <body>
+		      <div class='sk-ab sk-index'>
+            <div className='main'>
+              <Index />
+            </div>
+		      </div>
+	      </body>
+      </>
     );
 }
 
