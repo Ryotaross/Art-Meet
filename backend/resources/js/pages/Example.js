@@ -10,7 +10,7 @@ function Example() {
                 <div className="col-md-8">
                     <div className="card">
                         <div className="card-header">React導入できたわな</div>
-                        <div className="card-body">pages下に移動出来た？？</div>
+                        <div className="card-body">pages下に移動出来た?</div>
                         <Button color="secondary" variant="contained" href={`/`}>Homeに遷移ボタン</Button>
                     </div>
                 </div>

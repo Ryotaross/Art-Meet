@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap');
 .sk-ab {
 	position: relative;
 	overflow: hidden;
@@ -10,101 +11,11 @@
 
 /* Specific to index */
 .sk-ab.sk-index {
-	background-color: #D5F3EF;
+	background-color: 	#F5FFFA;
 	width: 390px;
 	height: 844px;
 }
 .main{
 	width: 348px;
 	margin:0 auto;
-}
-/* indexページ */
-
-.Art-Meat {
-  width: 131px;
-  height: 50px;
-  font-family:  'Roboto', sans-serif;;
-  font-size: 36px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: center;
-  color: #cfb5b5;
-}
-
-.Line {
-  width: 348px;
-  height: 1px;
-  border: solid 1px #979797;
-}
-
-.box{
-	display:flex;
-  flex-direction: row;
-  justify-content: space-between;
-	margin-top:36px;
-}
-
-.Bitmap {
-  width: 91px;
-  height: 85px;
-  margin: 12px 6px 41px 10px;
-}
-
-.itemName {
-  width: 208px;
-  margin: 0 33px 5px 6px;
-  font-family: 'Roboto', sans-serif;
-  font-size: 18px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.44;
-  letter-spacing: normal;
-  color: #333;
-}
-
-.maker {
-  width: 216px;
-  margin: 0 20px 5px 11px;
-  font-family: 'Roboto', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.65;
-  letter-spacing: normal;
-  color: #040404;
-}
-.startDay {
-  width: 216px;
-  margin: 0 20px 5px 11px;
-  font-family: 'Roboto', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.65;
-  letter-spacing: normal;
-  color: #040404;
-}
-.hash {
-  width: 38px;
-  margin: 0 8px 5px 27px;
-  font-family: 'Roboto', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #ff561b;
-}
-.endLine {
-  width: 348px;
-  height: 1px;
-  margin: 41px 0 0;
-  border: solid 1px #979797;
 }
