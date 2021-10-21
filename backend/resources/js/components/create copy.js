@@ -24,10 +24,14 @@ function Create() {
 
   const handleSubmit = () => {
     console.log(1);
+
+    const file = new FormData();
+    file.append("image", meat.image.files[0]);
+
     axios
       .post('http://localhost/api/meat/create',{
         name:meat.name,maker:meat.maker,materials:meat.materials,officialUrl:meat.officialUrl,amazonUrl:meat.amazonUrl,
-        rakutenUrl:meat.rakutenUrl,image:meat.image,startDay:meat.startDay
+        rakutenUrl:meat.rakutenUrl,image:file.image,startDay:meat.startDay
         },
         {
           headers: {
@@ -53,6 +57,13 @@ function Create() {
     setOpen(false);
   };
 
+  const uploadFile = (e) => {
+    setMeat({ ...meat, file: e.target.files[0] }
+    , () => {
+      this.sendFile();
+    });
+  };
+
   const card = (
     <React.Fragment >
       <CardMedia sx={{ width:{ xs: 400, md: 800 },height:60,m:'auto',pt:2,fontSize: 20,bgcolor:blueGrey[800],color:grey[50]}}>
@@ -65,7 +76,7 @@ function Create() {
           label="商品名"
           variant="standard"
           sx={{my:2}}
-          onChange={event => setMeat({ ...meat, name: event.target.value })}
+          onChange={event => setMeat({ ...meat, name: JSON.stringify(event.target.value) })}
         />
         <TextField
           fullWidth
@@ -73,7 +84,7 @@ function Create() {
           label="販売メーカー"
           variant="standard"
           sx={{my:2}}
-          onChange={event => setMeat({ ...meat, maker: event.target.value })}
+          onChange={event => setMeat({ ...meat, maker: JSON.stringify(event.target.value) })}
         />
         <TextField
           fullWidth
@@ -81,7 +92,7 @@ function Create() {
           label="原材料"
           variant="standard"
           sx={{my:2}}
-          onChange={event => setMeat({ ...meat, materials: event.target.value })}
+          onChange={event => setMeat({ ...meat, materials: JSON.stringify(event.target.value) })}
         />
         <TextField
           fullWidth
@@ -89,7 +100,7 @@ function Create() {
           label="公式ページURL"
           variant="standard"
           sx={{my:2}}
-          onChange={event => setMeat({ ...meat, officialUrl: event.target.value })}
+          onChange={event => setMeat({ ...meat, officialUrl: JSON.stringify(event.target.value) })}
         />
         <TextField
           fullWidth
@@ -97,7 +108,7 @@ function Create() {
           label="AmazonURL"
           variant="standard"
           sx={{my:2}}
-          onChange={event => setMeat({ ...meat, amazonUrl: event.target.value })}
+          onChange={event => setMeat({ ...meat, amazonUrl: JSON.stringify(event.target.value) })}
         />
         <TextField
           fullWidth
@@ -105,10 +116,10 @@ function Create() {
           label="楽天URL"
           variant="standard"
           sx={{my:2}}
-          onChange={event => setMeat({ ...meat, rakutenUrl: event.target.value })}
+          onChange={event => setMeat({ ...meat, rakutenUrl: JSON.stringify(event.target.value) })}
         />
-        <input type="date" 
-        onChange={event => setMeat({ ...meat, startDay: event.target.value })}/>
+        <input type="date" label="販売開始日"
+        onChange={event => setMeat({ ...meat, startDay: JSON.stringify(event.target.value) })}/>
         <input accept="image/*" multiple type="file" className="input" id="upload-img" 
         onChange={event => setMeat({ ...meat, image: event.target.value })} />
         <Button variant="contained" sx={{m:1}} onClick={handleSubmit}>投稿</Button>
