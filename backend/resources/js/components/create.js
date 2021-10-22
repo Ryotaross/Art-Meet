@@ -13,7 +13,8 @@ import { blueGrey } from '@mui/material/colors';
 import { grey } from '@mui/material/colors';
 
 function Create() {
-  const[meat,setMeat] = useState({id: "",name: "",maker: "",materials: "",officialUrl: "",amazonUrl: "",rakutenUrl:"",image:"",startDay:""})
+  const[meat,setMeat] = useState({id: "",name: "",maker: "",materials: "",officialUrl: "",amazonUrl: "",rakutenUrl:"",startDay:""});
+  const[image,setImage] = useState();
   const[errorCodes,setErrorCodes] = useState([])
   const[ErrorMessageJP,setErrorMessageJP] = useState([])
   const[ErrorMessageEN,setErrorMessageEN] = useState([])
@@ -24,10 +25,21 @@ function Create() {
 
   const handleSubmit = () => {
     console.log(1);
+
+    const file = new FormData()
+    file.append("name", JSON.stringify(meat.name));
+    file.append("maker", JSON.stringify(meat.maker));
+    file.append("materials", JSON.stringify(meat.materials));
+    file.append("officialUrl", JSON.stringify(meat.officialUrl));
+    file.append("amazonUrl", JSON.stringify(meat.amazonUrl));
+    file.append("rakutenUrl", JSON.stringify(meat.rakutenUrl));
+    file.append("startDay", JSON.stringify(meat.startDay));
+    file.append("image", image.current.files[0]);
+
     axios
       .post('http://localhost/api/meat/create',{
-        name:meat.name,maker:meat.maker,materials:meat.materials,officialUrl:meat.officialUrl,amazonUrl:meat.amazonUrl,
-        rakutenUrl:meat.rakutenUrl,image:meat.image,startDay:meat.startDay
+        name:file.name,maker:file.maker,materials:file.materials,officialUrl:file.officialUrl,amazonUrl:file.amazonUrl,
+        rakutenUrl:file.rakutenUrl,image:file.image,startDay:file.startDay
         },
         {
           headers: {
@@ -56,13 +68,13 @@ function Create() {
   const card = (
     <React.Fragment >
       <CardMedia sx={{ width:{ xs: 400, md: 800 },height:60,m:'auto',pt:2,fontSize: 20,bgcolor:blueGrey[800],color:grey[50]}}>
-          新規作成
+          新星規作成aaaaaaa
       </CardMedia>
       <CardContent sx={{m:'auto',width:{ xs: 400, md: 800 },border:1,borderColor: 'grey.500',boxShadow: 1,bgcolor:grey[50]}}>
         <TextField
           fullWidth
           id="standard-required"
-          label="商品名"
+          label="商品名,,,,"
           variant="standard"
           sx={{my:2}}
           onChange={event => setMeat({ ...meat, name: event.target.value })}
@@ -110,7 +122,7 @@ function Create() {
         <input type="date" 
         onChange={event => setMeat({ ...meat, startDay: event.target.value })}/>
         <input accept="image/*" multiple type="file" className="input" id="upload-img" 
-        onChange={event => setMeat({ ...meat, image: event.target.value })} />
+        onChange={event => setImage(event.target.value)} />
         <Button variant="contained" sx={{m:1}} onClick={handleSubmit}>投稿</Button>
       </CardContent>
     </React.Fragment>
