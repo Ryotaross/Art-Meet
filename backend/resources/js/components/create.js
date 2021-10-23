@@ -34,7 +34,7 @@ function Create() {
     file.append("amazonUrl", JSON.stringify(meat.amazonUrl));
     file.append("rakutenUrl", JSON.stringify(meat.rakutenUrl));
     file.append("startDay", JSON.stringify(meat.startDay));
-    file.append("image", image.current.files[0]);
+    file.append("image", image.files);
 
     axios
       .post('http://localhost/api/meat/create',{
@@ -68,13 +68,13 @@ function Create() {
   const card = (
     <React.Fragment >
       <CardMedia sx={{ width:{ xs: 400, md: 800 },height:60,m:'auto',pt:2,fontSize: 20,bgcolor:blueGrey[800],color:grey[50]}}>
-          新星規作成aaaaaaa
+          新規作成２
       </CardMedia>
       <CardContent sx={{m:'auto',width:{ xs: 400, md: 800 },border:1,borderColor: 'grey.500',boxShadow: 1,bgcolor:grey[50]}}>
         <TextField
           fullWidth
           id="standard-required"
-          label="商品名,,,,"
+          label="商品名"
           variant="standard"
           sx={{my:2}}
           onChange={event => setMeat({ ...meat, name: event.target.value })}
