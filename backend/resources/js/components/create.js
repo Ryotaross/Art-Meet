@@ -38,8 +38,8 @@ function Create() {
 
     axios
       .post('http://localhost/api/meat/create',{
-        name:file.name,maker:file.maker,materials:file.materials,officialUrl:file.officialUrl,amazonUrl:file.amazonUrl,
-        rakutenUrl:file.rakutenUrl,image:file.image,startDay:file.startDay
+        name:meat.name,maker:meat.maker,materials:meat.materials,officialUrl:meat.officialUrl,amazonUrl:file.amazonUrl,
+        rakutenUrl:meat.rakutenUrl,image:meat.image,startDay:meat.startDay
         },
         {
           headers: {

@@ -31,7 +31,7 @@ function Create() {
     axios
       .post('http://localhost/api/meat/create',{
         name:meat.name,maker:meat.maker,materials:meat.materials,officialUrl:meat.officialUrl,amazonUrl:meat.amazonUrl,
-        rakutenUrl:meat.rakutenUrl,image:file.image,startDay:meat.startDay
+        rakutenUrl:meat.rakutenUrl,image:meat.image,startDay:meat.startDay
         },
         {
           headers: {
