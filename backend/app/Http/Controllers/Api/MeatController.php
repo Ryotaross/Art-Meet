@@ -23,9 +23,10 @@ class MeatController extends Controller
     $meat->officialUrl = $request->officialUrl;
     $meat->amazonUrl = $request->amazonUrl;
     $meat->rakutenUrl = $request->rakutenUrl;
+    $path = $request->image->store('public/images');
+    $filename = basename($path);
+    $meat->image = $filename;
     $meat->startDay = $request->startDay;
-    $image_path = $request->file('image')->store('public/avatar/');
-    $meat->image = basename($image_path);
     $meat->save();
     return response()->json($meat, 200);
   }

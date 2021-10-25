@@ -15,17 +15,9 @@ import { grey } from '@mui/material/colors';
 function Create() {
   const[meat,setMeat] = useState({id: "",name: "",maker: "",materials: "",officialUrl: "",amazonUrl: "",rakutenUrl:"",startDay:""});
   const[image,setImage] = useState();
-  const[errorCodes,setErrorCodes] = useState([])
-  const[ErrorMessageJP,setErrorMessageJP] = useState([])
-  const[ErrorMessageEN,setErrorMessageEN] = useState([])
-  const[Error,setError] = useState(false)
-  const[open, setOpen] = useState(false);
-  const token = localStorage.getItem('token');
-  const history = useHistory();
 
   const handleSubmit = () => {
-    console.log(1);
-
+ 
     const file = new FormData()
     file.append("name", JSON.stringify(meat.name));
     file.append("maker", JSON.stringify(meat.maker));
@@ -38,8 +30,8 @@ function Create() {
 
     axios
       .post('http://localhost/api/meat/create',{
-        name:meat.name,maker:meat.maker,materials:meat.materials,officialUrl:meat.officialUrl,amazonUrl:file.amazonUrl,
-        rakutenUrl:meat.rakutenUrl,image:meat.image,startDay:meat.startDay
+        name:file.name,maker:file.maker,materials:file.materials,officialUrl:file.officialUrl,amazonUrl:file.amazonUrl,
+        rakutenUrl:file.rakutenUrl,image:file.image,startDay:file.startDay
         },
         {
           headers: {
@@ -49,26 +41,16 @@ function Create() {
       )
       .then(response => {
         console.log(response);
-        console.log(2);
       })
       .catch(error => {
         console.log(error);
-        console.log(3);
     });
   }
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+  
   const card = (
     <React.Fragment >
       <CardMedia sx={{ width:{ xs: 400, md: 800 },height:60,m:'auto',pt:2,fontSize: 20,bgcolor:blueGrey[800],color:grey[50]}}>
-          新規作成２
+          新規作成
       </CardMedia>
       <CardContent sx={{m:'auto',width:{ xs: 400, md: 800 },border:1,borderColor: 'grey.500',boxShadow: 1,bgcolor:grey[50]}}>
         <TextField
