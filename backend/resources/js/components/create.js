@@ -18,6 +18,7 @@ function Create() {
 
   const handleSubmit = () => {
 
+    console.log(image);
     const file = new FormData()
     file.append("name", JSON.stringify(meat.name));
     file.append("maker", JSON.stringify(meat.maker));
@@ -25,14 +26,11 @@ function Create() {
     file.append("officialUrl", JSON.stringify(meat.officialUrl));
     file.append("amazonUrl", JSON.stringify(meat.amazonUrl));
     file.append("rakutenUrl", JSON.stringify(meat.rakutenUrl));
-    file.append("startDay", JSON.stringify(meat.startDay));
-    file.append("image", image.files[0]);
+    file.append("startDay", meat.startDay);
+    file.append("image", image[0]);
 
     axios
-      .post('http://localhost/api/meat/create',{
-        name:file.name,maker:file.maker,materials:file.materials,officialUrl:file.officialUrl,amazonUrl:file.amazonUrl,
-        rakutenUrl:file.rakutenUrl,image:file.image,startDay:file.startDay
-        },
+      .post('http://localhost/api/meat/create',file,
         {
           headers: {
           'content-type': 'multipart/form-data',
@@ -104,7 +102,7 @@ function Create() {
         <input type="date" 
         onChange={event => setMeat({ ...meat, startDay: event.target.value })}/>
         <input accept="image/*" multiple type="file" className="input" id="upload-img" 
-        onChange={event => setImage(event.target.value)} />
+        onChange={event => setImage(event.target.files)} />
         <Button variant="contained" sx={{m:1}} onClick={handleSubmit}>投稿</Button>
       </CardContent>
     </React.Fragment>
