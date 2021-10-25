@@ -17,8 +17,7 @@ function Create() {
   const[image,setImage] = useState();
 
   const handleSubmit = () => {
-
-    console.log(image);
+    
     const file = new FormData()
     file.append("name", JSON.stringify(meat.name));
     file.append("maker", JSON.stringify(meat.maker));
