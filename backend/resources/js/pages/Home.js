@@ -6,13 +6,13 @@ import Index from '../components/Index';
 function Home() {
     return (
       <>
-        <body>
-		      <div class='sk-ab sk-index'>
+        <main>
+		      <div className='sk-ab sk-index'>
             <div className='main'>
               <Index />
             </div>
 		      </div>
-	      </body>
+	      </main>
       </>
     );
 }

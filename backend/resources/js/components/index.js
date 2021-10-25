@@ -1,8 +1,12 @@
 import React from 'react';
 import styled from "styled-components";
+import { useState } from 'react';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import Show from './show';
 
 function Index() {
-  
+  const [show,setShow] = useState(false); 
   const ArtMeat = styled.span`
     width: 131px;
     height: 50px;
@@ -49,7 +53,7 @@ function Index() {
     color: #333;
   `
 
-  const Maker = styled.p`
+  const ItemMaker = styled.p`
     width: 216px;
     margin: 0 20px 5px 11px;
     font-family: 'Noto Serif JP', serif;
@@ -62,7 +66,7 @@ function Index() {
     color: #040404;
   `;
 
-  const StartDay = styled.p`
+  const ItemStartDay = styled.p`
     width: 216px;
     margin: 0 20px 5px 11px;
     font-family: 'Noto Serif JP', serif;
@@ -94,6 +98,23 @@ function Index() {
     border: solid 1px #979797;
   `;
 
+  const toggleDrawer = (open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setShow(open);
+  };
+
+  const list = () => (
+    <Box
+      sx={{ width: 390 }}
+      role="presentation"
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
+    >
+      <Show />
+    </Box>
+  );
 
   return(
     <>
@@ -107,16 +128,25 @@ function Index() {
           <ItemName>
             商品名ー商品名ー商品名
           </ItemName>
-          <Maker>
+          <ItemMaker>
             日清食品
-          </Maker>
-          <StartDay>
+          </ItemMaker>
+          <ItemStartDay>
             2021年1月1日発売
-          </StartDay>
+          </ItemStartDay>
           <Hash>
             #大豆
           </Hash>
         </div>
+        <button onClick={toggleDrawer(true)}>test</button>
+        <Drawer
+          anchor="bottom"
+          open={show}
+          onClose={toggleDrawer(false)}
+          sx={{ width: 390 }}
+        >
+          {list()}
+        </Drawer>
       </FlexBox>
       <EndLine></EndLine>
     </>

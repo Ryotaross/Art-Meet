@@ -17,7 +17,7 @@ function Create() {
   const[image,setImage] = useState();
 
   const handleSubmit = () => {
- 
+
     const file = new FormData()
     file.append("name", JSON.stringify(meat.name));
     file.append("maker", JSON.stringify(meat.maker));
@@ -26,7 +26,7 @@ function Create() {
     file.append("amazonUrl", JSON.stringify(meat.amazonUrl));
     file.append("rakutenUrl", JSON.stringify(meat.rakutenUrl));
     file.append("startDay", JSON.stringify(meat.startDay));
-    file.append("image", image.files);
+    file.append("image", image.files[0]);
 
     axios
       .post('http://localhost/api/meat/create',{
