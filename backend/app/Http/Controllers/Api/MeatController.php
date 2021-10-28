@@ -57,4 +57,9 @@ class MeatController extends Controller
     $meats = Meat::all();
     return $meats;
   }
+  public function search(Request $request)
+  {
+    $meat = Meat::find($request->id);
+    return response()->json($meat,200);
+  }
 }

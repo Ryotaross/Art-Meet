@@ -115,14 +115,14 @@ function Index() {
     setShow(open);
   };
 
-  const list = (meat) => (
+  const list = (id) => (
     <Box
       sx={{ width: 390 }}
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
-      <Show meat={meat}/>
+      <Show id={id}/>
     </Box>
   );
 
@@ -152,7 +152,7 @@ function Index() {
           onClose={toggleDrawer(false)}
           sx={{ width: 390 }}
         >
-          {list(meat)}
+          {list(meat.id)}
       </Drawer>
       <EndLine></EndLine>
     </React.Fragment>

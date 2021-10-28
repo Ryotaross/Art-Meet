@@ -1,9 +1,12 @@
 import React from 'react';
+import { useState,useEffect } from 'react';
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 function Show(props) {
+  const[meat,setMeat] = useState({id: "",name: "",maker: "",materials: "",officialUrl: "",amazonUrl: "",rakutenUrl:"",startDay:""});
   
   const BackArrow = styled.div`
     width: 16px;
@@ -80,6 +83,16 @@ function Show(props) {
     color: #040404;
   `;
 
+  useEffect(()=>{
+    const file = new FormData()
+    file.append("id", props.id);
+    axios.post('http://localhost/api/meat/search',file)
+    .then(res => {
+      setMeat(res.data);
+      console.log(res.data);
+    })
+  },[])
+
   return(
     <>
       <BackArrow>＜</BackArrow>
@@ -87,28 +100,34 @@ function Show(props) {
       <Rectangle6>
         <Text>
         <Name>
-          {props.meat.name}
+          {meat.name}
         </Name>
         <Maker>
-          日清食品
+          {meat.maker}
         </Maker>
         <StartDay>
-          2021年1月1日発売
+          {meat.startDay}
         </StartDay>
         <Content>
-          原材料：大豆、油
+          原材料：{meat.materials}
         </Content>
         </Text>
         <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" sx={{my:5}}>
-          <Button variant="contained" color="primary">
-            公式
-          </Button>
-          <Button variant="contained" color="warning">
-            Amazon
-          </Button>
-          <Button variant="contained" color='error'>
-            楽天
-          </Button>
+          <Link to={meat.officialUrl}>
+            <Button variant="contained" color="primary">
+              公式
+            </Button>
+          </Link>
+          <Link to={meat.amazonUrl}>
+            <Button variant="contained" color="warning">
+              Amazon
+            </Button>
+          </Link>
+          <Link to={meat.rakutenUrl}>
+            <Button variant="contained" color='error'>
+              楽天
+            </Button>
+          </Link>
         </Stack>
       </Rectangle6>
     </>
