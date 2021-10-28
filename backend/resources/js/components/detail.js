@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
-function Detail() {
+function Detail(props) {
   
   const BackArrow = styled.div`
     width: 16px;
@@ -87,16 +87,16 @@ function Detail() {
       <Rectangle6>
         <Text>
         <ItemName>
-          商品名ー商品名ー商品名
+          {props.meat.name}
         </ItemName>
         <Maker>
-          日清食品
+          {props.meat.maker}
         </Maker>
         <StartDay>
-          2021年1月1日発売
+          {props.meat.StartDay}
         </StartDay>
         <Content>
-          原材料：大豆、油
+          原材料：{props.meat.materials}
         </Content>
         </Text>
         <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" sx={{my:5}}>

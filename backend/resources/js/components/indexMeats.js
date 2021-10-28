@@ -6,9 +6,7 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Show from './show';
 
-function Index() {
-  const[show,setShow] = useState(false); 
-  const[meats,setMeats] = useState([{id: "",name: "",maker: "",materials: "",officialUrl: "",amazonUrl: "",rakutenUrl:"",startDay:""}]);
+function IndexMeats(props) {
   const ArtMeat = styled.span`
     width: 131px;
     height: 50px;
@@ -100,50 +98,29 @@ function Index() {
     border: solid 1px #979797;
   `;
 
-  useEffect(()=>{
-    axios.get('http://localhost/api/meats')
-    .then(res => {
-      setMeats(res.data);
-      console.log(res.data);
-    })
-  },[]);
 
-  const toggleDrawer = (open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }
-    setShow(open);
-  };
 
-  const list = (meat) => (
-    <Box
-      sx={{ width: 390 }}
-      role="presentation"
-      onClick={toggleDrawer(false)}
-      onKeyDown={toggleDrawer(false)}
-    >
-      <Show meat={meat}/>
-    </Box>
-  );
-
-  const IndexMeats = (
-    meats.map((meat) => 
-    <React.Fragment key={meat.id}>
+  return(
+    <>
+      <ArtMeat>
+        Art-Meat
+      </ArtMeat>
+      <Line></Line>
       <FlexBox onClick={toggleDrawer(true)}>
         <Bitmap></Bitmap>
         <div>
           <ItemName>
-            {meat.name}
+            商品名ー商品名ー商品名
           </ItemName>
           <ItemMaker>
-            {meat.maker}
+            日清食品
           </ItemMaker>
           <ItemStartDay>
-            {meat.startDay}
+            2021年1月1日発売
           </ItemStartDay>
-          {/*<Hash>
+          <Hash>
             #大豆
-          </Hash>*/}
+          </Hash>
         </div>
       </FlexBox>
       <Drawer
@@ -152,22 +129,10 @@ function Index() {
           onClose={toggleDrawer(false)}
           sx={{ width: 390 }}
         >
-          {list(meat)}
+          {list()}
       </Drawer>
       <EndLine></EndLine>
-    </React.Fragment>
-    )
-  ) 
-
-  return(
-    <>
-      <ArtMeat>
-        Art-Meat
-      </ArtMeat>
-      <Line></Line>
-      {IndexMeats}
     </>
-    
   );
 }
 

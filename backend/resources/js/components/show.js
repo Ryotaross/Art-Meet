@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
-function Show() {
+function Show(props) {
   
   const BackArrow = styled.div`
     width: 16px;
@@ -87,7 +87,7 @@ function Show() {
       <Rectangle6>
         <Text>
         <Name>
-          商品名ー商品名ー商品名
+          {props.meat.name}
         </Name>
         <Maker>
           日清食品
