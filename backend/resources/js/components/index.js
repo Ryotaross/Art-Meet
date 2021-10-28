@@ -9,6 +9,7 @@ import Show from './show';
 function Index() {
   const[show,setShow] = useState(false); 
   const[meats,setMeats] = useState([{id: "",name: "",maker: "",materials: "",officialUrl: "",amazonUrl: "",rakutenUrl:"",startDay:""}]);
+  const[selectId,setSelectId] = useState();
   const ArtMeat = styled.span`
     width: 131px;
     height: 50px;
@@ -108,11 +109,12 @@ function Index() {
     })
   },[]);
 
-  const toggleDrawer = (open) => (event) => {
+  const toggleDrawer = (open,id) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
     setShow(open);
+    setSelectId(id);
   };
 
   const list = (id) => (
@@ -129,7 +131,7 @@ function Index() {
   const IndexMeats = (
     meats.map((meat) => 
     <React.Fragment key={meat.id}>
-      <FlexBox onClick={toggleDrawer(true)}>
+      <FlexBox onClick={toggleDrawer(true,meat.id)}>
         <Bitmap></Bitmap>
         <div>
           <ItemName>
@@ -146,14 +148,6 @@ function Index() {
           </Hash>*/}
         </div>
       </FlexBox>
-      <Drawer
-          anchor="bottom"
-          open={show}
-          onClose={toggleDrawer(false)}
-          sx={{ width: 390 }}
-        >
-          {list(meat.id)}
-      </Drawer>
       <EndLine></EndLine>
     </React.Fragment>
     )
@@ -166,6 +160,14 @@ function Index() {
       </ArtMeat>
       <Line></Line>
       {IndexMeats}
+      <Drawer
+          anchor="bottom"
+          open={show}
+          onClose={toggleDrawer(false)}
+          sx={{ width: 390 }}
+        >
+          {list(selectId)}
+      </Drawer>
     </>
     
   );
