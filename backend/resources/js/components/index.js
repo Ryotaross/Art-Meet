@@ -5,6 +5,7 @@ import axios from 'axios';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Show from './show';
+import IndexMeats from './indexMeats';
 
 function Index() {
   const[show,setShow] = useState(false); 
@@ -128,7 +129,7 @@ function Index() {
     </Box>
   );
 
-  const IndexMeats = (
+  const IndexMeat = (
     meats.map((meat) => 
     <React.Fragment key={meat.id}>
       <FlexBox onClick={toggleDrawer(true,meat.id)}>
@@ -159,7 +160,7 @@ function Index() {
         Art-Meat
       </ArtMeat>
       <Line></Line>
-      {IndexMeats}
+      {IndexMeat}
       <Drawer
           anchor="bottom"
           open={show}

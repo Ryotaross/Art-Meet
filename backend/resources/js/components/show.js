@@ -1,17 +1,24 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 function Show(props) {
   const[meat,setMeat] = useState({id: "",name: "",maker: "",materials: "",officialUrl: "",amazonUrl: "",rakutenUrl:"",startDay:""});
+  const history = useHistory();
   
   const BackArrow = styled.div`
     width: 16px;
     height: 19px;
   `;
+
+  const Back = styled.button`
+  width: 16px;
+  height: 19px;
+  text-align:right;
+`;
 
   const Image = styled.div `
     width: 390px;
@@ -93,9 +100,16 @@ function Show(props) {
     })
   },[])
 
+  function handleClick(event) {
+    history.push({
+      pathname: '/edit/' + event.target.value
+    });
+  }
+
   return(
     <>
       <BackArrow>＜</BackArrow>
+      <Back onClick={handleClick} value={meat.id}>:</Back>
       <Image></Image>
       <Rectangle6>
         <Text>

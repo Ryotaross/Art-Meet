@@ -10,6 +10,12 @@ function Detail(props) {
     height: 19px;
   `;
 
+  const Back = styled.div`
+    width: 16px;
+    height: 19px;
+    text-align:right;
+  `;
+
   const Bitmap = styled.div `
     width: 390px;
     height: 295px;
@@ -80,9 +86,14 @@ function Detail(props) {
     color: #040404;
   `;
 
+  const handleClick = () => {
+    
+  }
+
   return(
     <>
       <BackArrow>＜</BackArrow>
+      <Back onClick={handleClick}>:</Back>
       <Bitmap></Bitmap>
       <Rectangle6>
         <Text>

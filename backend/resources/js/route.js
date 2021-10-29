@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Sub from './pages/Sub';
 import Away from './pages/Away';
 import NewMeat from './pages/NewMeat';
+import Edit from './pages/Edit';
 
   function App() {
     return (
@@ -19,6 +20,7 @@ import NewMeat from './pages/NewMeat';
               <Route path='/away' exact component={Away} />
               <Route path='/' exact component={Home} />
               <Route path='/create' exact component={NewMeat} />
+              <Route exact path="/edit/:id" component={Edit} />
             </Switch>
         </div>
     );

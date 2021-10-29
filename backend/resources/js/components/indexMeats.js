@@ -7,6 +7,7 @@ import Drawer from '@mui/material/Drawer';
 import Show from './show';
 
 function IndexMeats(props) {
+  const meats = props.meats;
   const ArtMeat = styled.span`
     width: 131px;
     height: 50px;
@@ -98,42 +99,40 @@ function IndexMeats(props) {
     border: solid 1px #979797;
   `;
 
-
-
-  return(
-    <>
-      <ArtMeat>
-        Art-Meat
-      </ArtMeat>
-      <Line></Line>
-      <FlexBox onClick={toggleDrawer(true)}>
+  const IndexMeat = (
+    meats.map((meat) => 
+    <React.Fragment key={meat.id}>
+      <FlexBox onClick={props.toggleDrawer(true,meat.id)}>
         <Bitmap></Bitmap>
         <div>
           <ItemName>
-            商品名ー商品名ー商品名
+            {meat.name}
           </ItemName>
           <ItemMaker>
-            日清食品
+            {meat.maker}
           </ItemMaker>
           <ItemStartDay>
-            2021年1月1日発売
+            {meat.startDay}
           </ItemStartDay>
-          <Hash>
+          {/*<Hash>
             #大豆
-          </Hash>
+          </Hash>*/}
         </div>
       </FlexBox>
-      <Drawer
-          anchor="bottom"
-          open={show}
-          onClose={toggleDrawer(false)}
-          sx={{ width: 390 }}
-        >
-          {list()}
-      </Drawer>
       <EndLine></EndLine>
-    </>
+    </React.Fragment>
+    )
+  ) 
+
+  const handleClick = () =>{
+    console.log(props.meats);
+    console.log(props);
+  }
+
+
+  return(
+    {IndexMeat}
   );
 }
 
-export default Index;
+export default IndexMeats;

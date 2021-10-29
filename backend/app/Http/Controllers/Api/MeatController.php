@@ -44,7 +44,6 @@ class MeatController extends Controller
     $meat->officialUrl = $request->officialUrl;
     $meat->amazonUrl = $request->amazonUrl;
     $meat->rakutenUrl = $request->rakutenUrl;
-    $meat->image = $request->image;
     $meat->startDay = $request->startDay;
     $meat->save();
     $meats = Meat::all();
