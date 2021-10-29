@@ -15,16 +15,17 @@ import { grey } from '@mui/material/colors';
 function Create() {
   const[meat,setMeat] = useState({id: "",name: "",maker: "",materials: "",officialUrl: "",amazonUrl: "",rakutenUrl:"",startDay:""});
   const[image,setImage] = useState();
+  const history = useHistory();
 
   const handleSubmit = () => {
     
     const file = new FormData()
-    file.append("name", JSON.stringify(meat.name));
-    file.append("maker", JSON.stringify(meat.maker));
-    file.append("materials", JSON.stringify(meat.materials));
-    file.append("officialUrl", JSON.stringify(meat.officialUrl));
-    file.append("amazonUrl", JSON.stringify(meat.amazonUrl));
-    file.append("rakutenUrl", JSON.stringify(meat.rakutenUrl));
+    file.append("name", meat.name);
+    file.append("maker", meat.maker);
+    file.append("materials", meat.materials);
+    file.append("officialUrl", meat.officialUrl);
+    file.append("amazonUrl", meat.amazonUrl);
+    file.append("rakutenUrl", meat.rakutenUrl);
     file.append("startDay", meat.startDay);
     file.append("image", image[0]);
 
@@ -38,6 +39,7 @@ function Create() {
       )
       .then(response => {
         console.log(response);
+        history.push('/');
       })
       .catch(error => {
         console.log(error);

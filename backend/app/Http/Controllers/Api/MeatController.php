@@ -12,7 +12,7 @@ class MeatController extends Controller
   public function index()
   {
     $meats = Meat::all();
-    return response()->json($meats,200);
+    return $meats;
   }
   public function create(Request $request)
   {
@@ -23,7 +23,7 @@ class MeatController extends Controller
     $meat->officialUrl = $request->officialUrl;
     $meat->amazonUrl = $request->amazonUrl;
     $meat->rakutenUrl = $request->rakutenUrl;
-    $path = $request->image->store('public/images');
+    $path = $request->file('image')->store('public/image/');
     $filename = basename($path);
     $meat->image = $filename;
     $meat->startDay = $request->startDay;

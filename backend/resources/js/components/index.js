@@ -5,12 +5,15 @@ import axios from 'axios';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Show from './show';
+import LoadingInterface from './LoadingInterface';
 import IndexMeats from './indexMeats';
 
 function Index() {
   const[show,setShow] = useState(false); 
-  const[meats,setMeats] = useState([{id: "",name: "",maker: "",materials: "",officialUrl: "",amazonUrl: "",rakutenUrl:"",startDay:""}]);
+  const[meats,setMeats] = useState([{id: "",name: "",maker: "",materials: "",officialUrl: "",amazonUrl: "",rakutenUrl:"",startDay:"",image:""}]);
   const[selectId,setSelectId] = useState();
+  const[loading,setLoading] = useState(true);
+
   const ArtMeat = styled.span`
     width: 131px;
     height: 50px;
@@ -38,7 +41,7 @@ function Index() {
     margin:36px auto;
   `
 
-  const Bitmap = styled.div `
+  const Bitmap = styled.img `
     width: 91px;
     height: 85px;
     margin: 12px 6px 12px 10px;
@@ -107,6 +110,7 @@ function Index() {
     .then(res => {
       setMeats(res.data);
       console.log(res.data);
+      setLoading(false);
     })
   },[]);
 
@@ -129,11 +133,18 @@ function Index() {
     </Box>
   );
 
+  const image = (img) => {
+    const image_path = "storage/image/" + img;
+    return(
+      <Bitmap src={image_path}/>
+    );
+  }
+
   const IndexMeat = (
     meats.map((meat) => 
     <React.Fragment key={meat.id}>
       <FlexBox onClick={toggleDrawer(true,meat.id)}>
-        <Bitmap></Bitmap>
+        {image(meat.image)}
         <div>
           <ItemName>
             {meat.name}
@@ -169,6 +180,7 @@ function Index() {
         >
           {list(selectId)}
       </Drawer>
+      
     </>
     
   );

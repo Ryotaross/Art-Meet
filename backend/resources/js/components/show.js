@@ -4,10 +4,12 @@ import { Link,useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import LoadingInterface from './LoadingInterface';
 
 function Show(props) {
-  const[meat,setMeat] = useState({id: "",name: "",maker: "",materials: "",officialUrl: "",amazonUrl: "",rakutenUrl:"",startDay:""});
+  const[meat,setMeat] = useState({id: "",name: "",maker: "",materials: "",officialUrl: "",amazonUrl: "",rakutenUrl:"",startDay:"",image:""});
   const history = useHistory();
+  const[showLoading,setShowLoading] = useState(true);
   
   const BackArrow = styled.div`
     width: 16px;
@@ -20,10 +22,10 @@ function Show(props) {
   text-align:right;
 `;
 
-  const Image = styled.div `
+  const Image = styled.img `
     width: 390px;
     height: 295px;
-    padding: 20px 366px 256px 8px;
+    margin: 12px 6px 12px 10px;
   `;
 
   const Rectangle6 = styled.div `
@@ -97,6 +99,7 @@ function Show(props) {
     .then(res => {
       setMeat(res.data);
       console.log(res.data);
+      setShowLoading(false);
     })
   },[])
 
@@ -106,11 +109,18 @@ function Show(props) {
     });
   }
 
+  const image = (img) => {
+    const image_path = "storage/image/" + img;
+    return(
+      <Image src={image_path}/>
+    );
+  }
+
   return(
     <>
       <BackArrow>＜</BackArrow>
       <Back onClick={handleClick} value={meat.id}>:</Back>
-      <Image></Image>
+      {image(meat.image)}
       <Rectangle6>
         <Text>
         <Name>
