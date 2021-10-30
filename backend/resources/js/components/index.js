@@ -7,6 +7,7 @@ import Drawer from '@mui/material/Drawer';
 import Show from './show';
 import LoadingInterface from './LoadingInterface';
 import IndexMeats from './indexMeats';
+import { sp,pc,vw } from '../media';
 
 function Index() {
   const[show,setShow] = useState(false); 
