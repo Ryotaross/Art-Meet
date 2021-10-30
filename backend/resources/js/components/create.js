@@ -13,8 +13,8 @@ import { blueGrey } from '@mui/material/colors';
 import { grey } from '@mui/material/colors';
 
 function Create() {
-  const[meat,setMeat] = useState({id: "",name: "",maker: "",materials: "",officialUrl: "",amazonUrl: "",rakutenUrl:"",startDay:""});
-  const[image,setImage] = useState();
+  const [meat,setMeat] = useState({id: "",name: "",maker: "",materials: "",officialUrl: "",amazonUrl: "",rakutenUrl:"",startDay:""});
+  const [image,setImage] = useState();
   const history = useHistory();
 
   const handleSubmit = () => {

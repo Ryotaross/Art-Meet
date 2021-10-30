@@ -15,6 +15,12 @@ function Index() {
   const[selectId,setSelectId] = useState();
   const[loading,setLoading] = useState(true);
 
+  const Content = styled.div`
+    width:80%;
+    margin-top:30px;
+    
+  `;
+
   const ArtMeat = styled.span`
     width: 131px;
     height: 50px;
@@ -27,6 +33,15 @@ function Index() {
     letter-spacing: normal;
     text-align: center;
     color: #cfb5b5;
+    ${pc`
+      font-size: 50px;
+    `}
+  `;
+
+  const Subtitle = styled.span `
+    display:block;
+    font-family:  'Roboto', sans-serif;;
+    font-size: 20px;
   `;
 
   const Line = styled.div `
@@ -125,7 +140,7 @@ function Index() {
 
   const list = (id) => (
     <Box
-      sx={{ width: 390 }}
+      sx={{ width: 390,mx:'auto'  }}
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
@@ -168,20 +183,25 @@ function Index() {
 
   return(
     <>
-      <ArtMeat>
-        Art-Meat
-      </ArtMeat>
-      <Line></Line>
-      {IndexMeat}
-      <Drawer
-          anchor="bottom"
-          open={show}
-          onClose={toggleDrawer(false)}
-          sx={{ width: 390 }}
-        >
-          {list(selectId)}
-      </Drawer>
-      
+      <Content>
+        <ArtMeat>
+          Art-Meat
+        </ArtMeat>
+        <Subtitle>
+          人工肉特化型の情報サイトです。
+          気になるものを食べてみよう！
+        </Subtitle>
+        <Line></Line>
+        {IndexMeat}
+        <Drawer
+            anchor="bottom"
+            open={show}
+            onClose={toggleDrawer(false)}
+            sx={{ width: 390,mx:'auto' }}
+          >
+            {list(selectId)}
+        </Drawer>
+      </Content>
     </>
     
   );

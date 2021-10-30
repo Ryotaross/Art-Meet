@@ -13,8 +13,16 @@
 .sk-ab.sk-index {
 	background-color: 	#F5FFFA;
 	width: 390px;
+	margin: 0 auto;
 }
 .main{
 	width: 348px;
 	margin:0 auto;
+}
+
+@media screen and (min-width: 960px) {
+	.sk-ab.sk-index {
+		width:100%;
+	}
+	
 }
