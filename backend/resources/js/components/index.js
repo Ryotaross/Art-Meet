@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import { useState,useEffect } from 'react';
+import { GoogleMap, LoadScript, InfoWindow, Marker  } from '@react-google-maps/api';
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -15,10 +16,24 @@ function Index() {
   const[selectId,setSelectId] = useState();
   const[loading,setLoading] = useState(true);
 
+  const containerStyle = {
+    width: "400px",
+    height: "400px",
+  };
+  
+  const center = {
+    lat: 33.566255900000010000,
+    lng: 130.715857000000000000,
+  };
+
+  const centerP = {
+    lat: 33.566255900000010000,
+    lng: 130.715857000000000000,
+  };
+
   const Content = styled.div`
     width:80%;
     margin-top:30px;
-    
   `;
 
   const ArtMeat = styled.span`
@@ -181,6 +196,17 @@ function Index() {
     )
   ) 
 
+  const IndexMap = (
+    golfs.map((golf) => 
+    <React.Fragment key={golf.id}>
+      <Marker position={{lat : parseFloat(golf.lat),lng : parseFloat(golf.lng)}}/>
+        <InfoWindow position={{lat : parseFloat(golf.lat),lng : parseFloat(golf.lng)}}>
+          <a onClick={toggleDrawer(true,golf.id)}>{golf.name}</a>
+        </InfoWindow>
+    </React.Fragment>
+    )
+  ) 
+
   return(
     <>
       <Content>
@@ -202,6 +228,23 @@ function Index() {
             {list(selectId)}
         </Drawer>
       </Content>
+      <LoadScript googleMapsApiKey="AIzaSyC5wGBoyJ4BGGZETLXsqmdmbadXcSPaPCM">
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={center}
+          zoom={17}
+        >
+          {IndexMap}
+          <Drawer
+            anchor="bottom"
+            open={show}
+            onClose={toggleDrawer(false)}
+            sx={{ width: 390,mx:'auto' }}
+          >
+            {list(selectId)}
+        </Drawer>
+        </GoogleMap>
+      </LoadScript>
     </>
     
   );
