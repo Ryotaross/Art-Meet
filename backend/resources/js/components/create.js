@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { Redirect,useHistory } from 'react-router-dom';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -13,24 +14,34 @@ import { blueGrey } from '@mui/material/colors';
 import { grey } from '@mui/material/colors';
 
 function Create() {
-  const [meat,setMeat] = useState({id: "",name: "",maker: "",materials: "",officialUrl: "",amazonUrl: "",rakutenUrl:"",startDay:""});
+  const googleGeocoder = null;
+  const [golf,setGolf] = useState([{name: "",address: "",price: "",courseInfo: "",phone: "",hp:"",moreInfo:"",image:""}]);
   const [image,setImage] = useState();
+  const [lat,setLat] = useState("");
+  const [lng,setLng] = useState("");
   const history = useHistory();
 
   const handleSubmit = () => {
+
+    console.log(golf);
+    console.log(image);
+    console.log(lat);
+    console.log(lng);
     
     const file = new FormData()
-    file.append("name", meat.name);
-    file.append("maker", meat.maker);
-    file.append("materials", meat.materials);
-    file.append("officialUrl", meat.officialUrl);
-    file.append("amazonUrl", meat.amazonUrl);
-    file.append("rakutenUrl", meat.rakutenUrl);
-    file.append("startDay", meat.startDay);
+    file.append("name", golf.name);
+    file.append("address", golf.address);
+    file.append("price", golf.price);
+    file.append("phone", golf.phone);
+    file.append("hp", golf.hp);
+    file.append("moreInfo", golf.moreInfo);
     file.append("image", image[0]);
+    file.append("courseInfo", golf.courseInfo);
+    file.append("lat", lat);
+    file.append("lng", lng);
 
     axios
-      .post('http://localhost/api/meat/create',file,
+      .post('http://localhost/api/golf/create',file,
         {
           headers: {
           'content-type': 'multipart/form-data',
@@ -42,7 +53,27 @@ function Create() {
         history.push('/');
       })
       .catch(error => {
+        console.log(file);
         console.log(error);
+    });
+  }
+
+  const changeLocationName = (event) => {
+    if (event.key === 'Enter') {
+      geocode();
+      return;
+    }
+    setGolf({ ...golf, address: event.target.value })
+  }
+
+  function geocode() {
+    const geocoder = new window.google.maps.Geocoder();
+    geocoder.geocode({ address: golf.address }, (results, status) => {
+      if (status === 'OK') {
+        setLat(results[0].geometry.location.lat()),
+        setLng(results[0].geometry.location.lng());
+        console.log(123);
+      }
     });
   }
   
@@ -55,56 +86,67 @@ function Create() {
         <TextField
           fullWidth
           id="standard-required"
-          label="商品名"
+          label="コース名"
           variant="standard"
           sx={{my:2}}
-          onChange={event => setMeat({ ...meat, name: event.target.value })}
+          onChange={event => setGolf({ ...golf, name: event.target.value })}
         />
         <TextField
           fullWidth
           id="standard-required"
-          label="販売メーカー"
+          label="住所"
           variant="standard"
           sx={{my:2}}
-          onChange={event => setMeat({ ...meat, maker: event.target.value })}
+          onChange={(event) => changeLocationName(event)} 
+          value={golf.address} 
+          onKeyPress={(event) => changeLocationName(event)}
         />
         <TextField
           fullWidth
           id="standard-required"
-          label="原材料"
+          label="料金"
           variant="standard"
           sx={{my:2}}
-          onChange={event => setMeat({ ...meat, materials: event.target.value })}
+          onChange={event => setGolf({ ...golf, price: event.target.value })}
         />
         <TextField
           fullWidth
           id="standard-required"
-          label="公式ページURL"
+          label="コース情報"
           variant="standard"
           sx={{my:2}}
-          onChange={event => setMeat({ ...meat, officialUrl: event.target.value })}
+          onChange={event => setGolf({ ...golf, courseInfo: event.target.value })}
         />
         <TextField
           fullWidth
           id="standard-required"
-          label="AmazonURL"
+          label="電話番号"
           variant="standard"
           sx={{my:2}}
-          onChange={event => setMeat({ ...meat, amazonUrl: event.target.value })}
+          onChange={event => setGolf({ ...golf, phone: event.target.value })}
         />
         <TextField
           fullWidth
           id="standard-required"
-          label="楽天URL"
+          label="公式ホームページ"
           variant="standard"
           sx={{my:2}}
-          onChange={event => setMeat({ ...meat, rakutenUrl: event.target.value })}
+          onChange={event => setGolf({ ...golf, hp: event.target.value })}
         />
-        <input type="date" 
-        onChange={event => setMeat({ ...meat, startDay: event.target.value })}/>
+        <TextField
+          fullWidth
+          id="standard-required"
+          label="提携ホームページ"
+          variant="standard"
+          sx={{my:2}}
+          onChange={event => setGolf({ ...golf, moreInfo: event.target.value })}
+        />
         <input accept="image/*" multiple type="file" className="input" id="upload-img" 
         onChange={event => setImage(event.target.files)} />
         <Button variant="contained" sx={{m:1}} onClick={handleSubmit}>投稿</Button>
+        <LoadScript googleMapsApiKey={"AIzaSyC5wGBoyJ4BGGZETLXsqmdmbadXcSPaPCM"}>
+        </LoadScript>
+
       </CardContent>
     </React.Fragment>
   );

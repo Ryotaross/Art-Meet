@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import LoadingInterface from './LoadingInterface';
 
 function Show(props) {
-  const[meat,setMeat] = useState({id: "",name: "",maker: "",materials: "",officialUrl: "",amazonUrl: "",rakutenUrl:"",startDay:"",image:""});
+  const[golf,setGolf] = useState([{id: "",name: "",address: "",price: "",courseInfo: "",phone: "",hp:"",moreInfo:"",image:"",lat:0,lng:0}]);
   const history = useHistory();
   const[showLoading,setShowLoading] = useState(true);
   
@@ -95,9 +95,9 @@ function Show(props) {
   useEffect(()=>{
     const file = new FormData()
     file.append("id", props.id);
-    axios.post('http://localhost/api/meat/search',file)
+    axios.post('http://localhost/api/golf/search',file)
     .then(res => {
-      setMeat(res.data);
+      setGolf(res.data);
       console.log(res.data);
       setShowLoading(false);
     })
@@ -119,37 +119,35 @@ function Show(props) {
   return(
     <>
       <BackArrow>＜</BackArrow>
-      <Back onClick={handleClick} value={meat.id}>:</Back>
-      {image(meat.image)}
+      <Back onClick={handleClick} value={golf.id}>:</Back>
+      {image(golf.image)}
       <Rectangle6>
         <Text>
         <Name>
-          {meat.name}
+          {golf.name}
         </Name>
         <Maker>
-          {meat.maker}
+          {golf.address}
         </Maker>
         <StartDay>
-          {meat.startDay}
+          {golf.price}
         </StartDay>
         <Content>
-          原材料：{meat.materials}
+          {golf.courseInfo}
+        </Content>
+        <Content>
+          電話番号：{golf.phone}
         </Content>
         </Text>
         <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" sx={{my:5}}>
-          <Link to={meat.officialUrl}>
+          <Link to={golf.hp}>
             <Button variant="contained" color="primary">
               公式
             </Button>
           </Link>
-          <Link to={meat.amazonUrl}>
+          <Link to={golf.moreInfo}>
             <Button variant="contained" color="warning">
               Amazon
-            </Button>
-          </Link>
-          <Link to={meat.rakutenUrl}>
-            <Button variant="contained" color='error'>
-              楽天
             </Button>
           </Link>
         </Stack>

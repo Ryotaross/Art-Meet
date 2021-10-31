@@ -11,7 +11,7 @@ import { sp,pc,vw } from '../media';
 
 function Index() {
   const[show,setShow] = useState(false); 
-  const[meats,setMeats] = useState([{id: "",name: "",maker: "",materials: "",officialUrl: "",amazonUrl: "",rakutenUrl:"",startDay:"",image:""}]);
+  const[golfs,setGolfs] = useState([{id: "",name: "",address: "",price: "",courseInfo: "",phone: "",hp:"",moreInfo:"",image:"",lat:0,lng:0}]);
   const[selectId,setSelectId] = useState();
   const[loading,setLoading] = useState(true);
 
@@ -41,7 +41,7 @@ function Index() {
   const Subtitle = styled.span `
     display:block;
     font-family:  'Roboto', sans-serif;;
-    font-size: 20px;
+    font-size: 15px;
   `;
 
   const Line = styled.div `
@@ -122,9 +122,9 @@ function Index() {
   `;
 
   useEffect(()=>{
-    axios.get('http://localhost/api/meats')
+    axios.get('http://localhost/api/golfs')
     .then(res => {
-      setMeats(res.data);
+      setGolfs(res.data);
       console.log(res.data);
       setLoading(false);
     })
@@ -157,19 +157,19 @@ function Index() {
   }
 
   const IndexMeat = (
-    meats.map((meat) => 
-    <React.Fragment key={meat.id}>
-      <FlexBox onClick={toggleDrawer(true,meat.id)}>
-        {image(meat.image)}
+    golfs.map((golf) => 
+    <React.Fragment key={golf.id}>
+      <FlexBox onClick={toggleDrawer(true,golf.id)}>
+        {image(golf.image)}
         <div>
           <ItemName>
-            {meat.name}
+            {golf.name}
           </ItemName>
           <ItemMaker>
-            {meat.maker}
+            {golf.address}
           </ItemMaker>
           <ItemStartDay>
-            {meat.startDay}
+            {golf.price}
           </ItemStartDay>
           {/*<Hash>
             #大豆
@@ -188,7 +188,7 @@ function Index() {
           Art-Meat
         </ArtMeat>
         <Subtitle>
-          人工肉特化型の情報サイトです。
+          人工肉特化型の情報サイトです。<br />
           気になるものを食べてみよう！
         </Subtitle>
         <Line></Line>
