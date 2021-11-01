@@ -4,12 +4,26 @@ import { Link,useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import golfIcon from './image/golf1_animated_300.gif';
 import LoadingInterface from './LoadingInterface';
 
 function Show(props) {
   const[golf,setGolf] = useState([{id: "",name: "",address: "",price: "",courseInfo: "",phone: "",hp:"",moreInfo:"",image:"",lat:0,lng:0}]);
   const history = useHistory();
-  const[showLoading,setShowLoading] = useState(true);
+  const[load,setLoad] = useState(true);
+
+  const DetailShow = styled.div `
+    width:500px;
+    margin:10px auto;
+  `
+  const Gif = styled.div `
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height:500px;
+    background-color: white;
+  `
   
   const BackArrow = styled.div`
     width: 16px;
@@ -24,8 +38,9 @@ function Show(props) {
 
   const Image = styled.img `
     width: 390px;
-    height: 295px;
-    margin: 12px 6px 12px 10px;
+    height: 100%;
+    margin: 12px 0;
+    object-fit:cover;
   `;
 
   const Rectangle6 = styled.div `
@@ -99,7 +114,7 @@ function Show(props) {
     .then(res => {
       setGolf(res.data);
       console.log(res.data);
-      setShowLoading(false);
+      setLoad(false);
     })
   },[])
 
@@ -116,42 +131,60 @@ function Show(props) {
     );
   }
 
+  const loading = () => {
+    if(load){
+      return(
+        <p></p>
+      )
+    }
+  }
+
   return(
     <>
-      <BackArrow>＜</BackArrow>
-      <Back onClick={handleClick} value={golf.id}>:</Back>
-      {image(golf.image)}
-      <Rectangle6>
-        <Text>
-        <Name>
-          {golf.name}
-        </Name>
-        <Maker>
-          {golf.address}
-        </Maker>
-        <StartDay>
-          {golf.price}
-        </StartDay>
-        <Content>
-          {golf.courseInfo}
-        </Content>
-        <Content>
-          電話番号：{golf.phone}
-        </Content>
-        </Text>
-        <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" sx={{my:5}}>
-          <Link to={golf.hp}>
-            <Button variant="contained" color="primary">
-              公式
-            </Button>
-          </Link>
-          <Link to={golf.moreInfo}>
-            <Button variant="contained" color="warning">
-              Amazon
-            </Button>
-          </Link>
-        </Stack>
-      </Rectangle6>
+      <DetailShow>
+        {load?
+          <Gif>
+            <img src={golfIcon}></img>
+          </Gif>
+        :
+        <>
+        <BackArrow>＜</BackArrow>
+        <Back onClick={handleClick} value={golf.id}>:</Back>
+        {image(golf.image)}
+        <Rectangle6>
+          <Text>
+          <Name>
+            {golf.name}
+          </Name>
+          <Maker>
+            {golf.address}
+          </Maker>
+          <StartDay>
+            {golf.price}
+          </StartDay>
+          <Content>
+            {golf.courseInfo}
+          </Content>
+          <Content>
+            電話番号：{golf.phone}
+          </Content>
+          </Text>
+          <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" sx={{my:5}}>
+            <Link to={golf.hp}>
+              <Button variant="contained" color="primary">
+                公式
+              </Button>
+            </Link>
+            <Link to={golf.moreInfo}>
+              <Button variant="contained" color="warning">
+                詳細情報
+              </Button>
+            </Link>
+          </Stack>
+        </Rectangle6>
+        </>
+        }
+      </DetailShow>
     </>
   );
 }

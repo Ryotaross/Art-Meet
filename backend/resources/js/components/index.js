@@ -9,16 +9,20 @@ import Show from './show';
 import LoadingInterface from './LoadingInterface';
 import IndexMeats from './indexMeats';
 import { sp,pc,vw } from '../media';
+import golfIcon from './image/golf1_animated_300.gif'
 
-function Index() {
+function Index(props) {
   const[show,setShow] = useState(false); 
-  const[golfs,setGolfs] = useState([{id: "",name: "",address: "",price: "",courseInfo: "",phone: "",hp:"",moreInfo:"",image:"",lat:0,lng:0}]);
+  const golfs = props.golfs;
   const[selectId,setSelectId] = useState();
+  const[load,setLoad] = useState(true);
   const[loading,setLoading] = useState(true);
 
   const containerStyle = {
-    width: "400px",
+    width: "90%",
     height: "400px",
+    marginRight: "auto",
+    marginLeft: "auto",
   };
   
   const center = {
@@ -32,8 +36,8 @@ function Index() {
   };
 
   const Content = styled.div`
-    width:80%;
-    margin-top:30px;
+    width:90%;
+    margin:30px auto;
   `;
 
   const ArtMeat = styled.span`
@@ -59,8 +63,16 @@ function Index() {
     font-size: 15px;
   `;
 
+  const List = styled.div `
+    overflow: scroll;
+    width:450px;
+    height: 400px;
+    margin:30px auto;
+    background: white;
+  `
+
   const Line = styled.div `
-    width: 348px;
+    width: 100%;
     height: 1px;
     border: solid 1px #979797;
   `;
@@ -73,13 +85,13 @@ function Index() {
   `
 
   const Bitmap = styled.img `
-    width: 91px;
-    height: 85px;
-    margin: 12px 6px 12px 10px;
+    width: 120px;
+    height: 100%;
+    margin: 5px 6px 12px 33px;
+    object-fit:cover;
   `
 
   const ItemName = styled.p`
-    width: 208px;
     margin: 0 33px 5px 6px;
     font-family: 'Noto Serif JP', serif;
     font-size: 15px;
@@ -92,7 +104,6 @@ function Index() {
   `
 
   const ItemMaker = styled.p`
-    width: 216px;
     margin: 0 20px 5px 11px;
     font-family: 'Noto Serif JP', serif;
     font-size: 11px;
@@ -105,7 +116,6 @@ function Index() {
   `;
 
   const ItemStartDay = styled.p`
-    width: 216px;
     margin: 0 20px 5px 11px;
     font-family: 'Noto Serif JP', serif;
     font-size: 11px;
@@ -118,7 +128,6 @@ function Index() {
   `;
 
   const Hash = styled.p `
-    width: 38px;
     margin: 0 8px;
     font-family: 'Noto Serif JP', serif;
     font-size: 11px;
@@ -131,19 +140,11 @@ function Index() {
   `;
 
   const EndLine = styled.div `
-    width: 348px;
+    width: 100%;
     height: 1px;
     border: solid 1px #979797;
   `;
 
-  useEffect(()=>{
-    axios.get('http://localhost/api/golfs')
-    .then(res => {
-      setGolfs(res.data);
-      console.log(res.data);
-      setLoading(false);
-    })
-  },[]);
 
   const toggleDrawer = (open,id) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -200,7 +201,7 @@ function Index() {
     golfs.map((golf) => 
     <React.Fragment key={golf.id}>
       <Marker position={{lat : parseFloat(golf.lat),lng : parseFloat(golf.lng)}}/>
-        <InfoWindow position={{lat : parseFloat(golf.lat),lng : parseFloat(golf.lng)}}>
+        <InfoWindow position={{lat : parseFloat(golf.lat),lng : parseFloat(golf.lng)}} >
           <a onClick={toggleDrawer(true,golf.id)}>{golf.name}</a>
         </InfoWindow>
     </React.Fragment>
@@ -211,12 +212,33 @@ function Index() {
     <>
       <Content>
         <ArtMeat>
-          Art-Meat
+          Osaka-Short-Course
         </ArtMeat>
         <Subtitle>
-          人工肉特化型の情報サイトです。<br />
-          気になるものを食べてみよう！
+          ショートコース情報サイトです。<br />
+          現在は大阪限定です。
         </Subtitle>
+      </Content>
+      <div>
+        <LoadScript googleMapsApiKey="AIzaSyC5wGBoyJ4BGGZETLXsqmdmbadXcSPaPCM">
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={center}
+            zoom={10}
+          >
+            {IndexMap}
+            <Drawer
+              anchor="bottom"
+              open={show}
+              onClose={toggleDrawer(false)}
+              sx={{ width: 390,mx:'auto' }}
+            >
+              {list(selectId)}
+            </Drawer>
+          </GoogleMap>
+        </LoadScript>
+      </div>
+      <List>
         <Line></Line>
         {IndexMeat}
         <Drawer
@@ -227,24 +249,7 @@ function Index() {
           >
             {list(selectId)}
         </Drawer>
-      </Content>
-      <LoadScript googleMapsApiKey="AIzaSyC5wGBoyJ4BGGZETLXsqmdmbadXcSPaPCM">
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={center}
-          zoom={17}
-        >
-          {IndexMap}
-          <Drawer
-            anchor="bottom"
-            open={show}
-            onClose={toggleDrawer(false)}
-            sx={{ width: 390,mx:'auto' }}
-          >
-            {list(selectId)}
-        </Drawer>
-        </GoogleMap>
-      </LoadScript>
+      </List>
     </>
     
   );
