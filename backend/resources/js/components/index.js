@@ -1,36 +1,26 @@
 import React from 'react';
 import styled from "styled-components";
 import { useState,useEffect } from 'react';
-import { GoogleMap, LoadScript, InfoWindow, Marker  } from '@react-google-maps/api';
-import axios from 'axios';
+import { GoogleMap, LoadScript, InfoWindow, Marker, MapOptions,Maps  } from '@react-google-maps/api';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Show from './show';
-import LoadingInterface from './LoadingInterface';
-import IndexMeats from './indexMeats';
 import { sp,pc,vw } from '../media';
-import golfIcon from './image/golf1_animated_300.gif'
 
 function Index(props) {
   const[show,setShow] = useState(false); 
   const golfs = props.golfs;
   const[selectId,setSelectId] = useState();
-  const[load,setLoad] = useState(true);
-  const[loading,setLoading] = useState(true);
 
   const containerStyle = {
     width: "90%",
-    height: "400px",
+    height: "450px",
     marginRight: "auto",
     marginLeft: "auto",
+    boxShadow: "rgba(0, 0, 0, 0.4) 0px 30px 90px",
   };
   
   const center = {
-    lat: 33.566255900000010000,
-    lng: 130.715857000000000000,
-  };
-
-  const centerP = {
     lat: 33.566255900000010000,
     lng: 130.715857000000000000,
   };
@@ -69,13 +59,13 @@ function Index(props) {
     height: 400px;
     margin:30px auto;
     background: white;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+    &:hover {
+      cursor: pointer;
+      border-radius: 20px;
+      color: white;
+    }
   `
-
-  const Line = styled.div `
-    width: 100%;
-    height: 1px;
-    border: solid 1px #979797;
-  `;
 
   const FlexBox = styled.div `
     display:flex;
@@ -140,8 +130,9 @@ function Index(props) {
   `;
 
   const EndLine = styled.div `
-    width: 100%;
+    width: 95%;
     height: 1px;
+    margin:0 auto;
     border: solid 1px #979797;
   `;
 
@@ -239,7 +230,6 @@ function Index(props) {
         </LoadScript>
       </div>
       <List>
-        <Line></Line>
         {IndexMeat}
         <Drawer
             anchor="bottom"
