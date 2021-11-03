@@ -6,23 +6,63 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Show from './show';
 import { sp,pc,vw } from '../media';
+import MapGL, {
+  Popup,
+  NavigationControl,
+  FullscreenControl,
+  ScaleControl,
+  GeolocateControl
+} from 'react-map-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
+
+import Pins from './pins';
+import GolfInfo from './golf-info';
+
+const TOKEN = 'pk.eyJ1IjoicnlvdGFybzIwIiwiYSI6ImNrdml2cmhtZ2Jld2kyd3Q5ZHFudzhrcGQifQ.2zjaqGum-QE9BzQYuE4zCg'
+
+const geolocateStyle = {
+  top: 0,
+  left: 0,
+  padding: '10px'
+};
+
+const fullscreenControlStyle = {
+  top: 36,
+  left: 0,
+  padding: '10px'
+};
+
+const navStyle = {
+  top: 72,
+  left: 0,
+  padding: '10px'
+};
+
+const scaleControlStyle = {
+  bottom: 36,
+  left: 0,
+  padding: '10px'
+};
 
 function Index(props) {
-  const[show,setShow] = useState(false); 
+  const [show,setShow] = useState(false); 
   const golfs = props.golfs;
-  const[selectId,setSelectId] = useState();
+  const [selectId,setSelectId] = useState();
+  const [viewport, setViewport] = useState({
+    latitude: 33.566255900000010000,
+    longitude: 130.715857000000000000,
+    zoom: 8,
+    bearing: 0,
+    pitch: 0
+  });
+  const [popupInfo, setPopupInfo] = useState(null);
 
   const containerStyle = {
     width: "90%",
     height: "450px",
     marginRight: "auto",
     marginLeft: "auto",
-    boxShadow: "rgba(0, 0, 0, 0.4) 0px 30px 90px",
-  };
-  
-  const center = {
-    lat: 33.566255900000010000,
-    lng: 130.715857000000000000,
+    boxShadow: "rgba(0, 0, 0, 0.4) 0px 30px 70px",
   };
 
   const Content = styled.div`
@@ -59,7 +99,7 @@ function Index(props) {
     height: 400px;
     margin:30px auto;
     background: white;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 70px;
     &:hover {
       cursor: pointer;
       border-radius: 20px;
@@ -188,17 +228,6 @@ function Index(props) {
     )
   ) 
 
-  const IndexMap = (
-    golfs.map((golf) => 
-    <React.Fragment key={golf.id}>
-      <Marker position={{lat : parseFloat(golf.lat),lng : parseFloat(golf.lng)}}/>
-        <InfoWindow position={{lat : parseFloat(golf.lat),lng : parseFloat(golf.lng)}} >
-          <a onClick={toggleDrawer(true,golf.id)}>{golf.name}</a>
-        </InfoWindow>
-    </React.Fragment>
-    )
-  ) 
-
   return(
     <>
       <Content>
@@ -211,23 +240,32 @@ function Index(props) {
         </Subtitle>
       </Content>
       <div>
-        <LoadScript googleMapsApiKey="AIzaSyC5wGBoyJ4BGGZETLXsqmdmbadXcSPaPCM">
-          <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={center}
-            zoom={10}
-          >
-            {IndexMap}
-            <Drawer
-              anchor="bottom"
-              open={show}
-              onClose={toggleDrawer(false)}
-              sx={{ width: 390,mx:'auto' }}
+
+        <MapGL
+          {...viewport}
+          {...containerStyle}
+          mapStyle="mapbox://styles/mapbox/dark-v9"
+          onViewportChange={setViewport}
+          mapboxApiAccessToken={TOKEN}
+        >
+          <Pins golf={golfs} onClick={setPopupInfo}/>
+          {popupInfo && (
+            <Popup
+              tipSize={5}
+              anchor="top"
+              longitude={popupInfo.lng}
+              latitude={popupInfo.lat}
+              closeOnClick={false}
+              onClose={setPopupInfo}
             >
-              {list(selectId)}
-            </Drawer>
-          </GoogleMap>
-        </LoadScript>
+              <GolfInfo info={popupInfo} toggleDrawer={toggleDrawer} />
+            </Popup>
+          )}
+          <GeolocateControl style={geolocateStyle} />
+          <FullscreenControl style={fullscreenControlStyle} />
+          <NavigationControl style={navStyle} />
+          <ScaleControl style={scaleControlStyle} />
+        </MapGL>
       </div>
       <List>
         {IndexMeat}
