@@ -42,7 +42,7 @@
 		width:100%;
 	}
 	.main{
-		width:70%;
+		width:60%;
 	}
 }
 
@@ -50,4 +50,8 @@
   100% {
     opacity: 0;
   }
+}
+
+.MapStyle{
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 70px;
 }

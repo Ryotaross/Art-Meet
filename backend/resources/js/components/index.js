@@ -14,9 +14,11 @@ import MapGL, {
   GeolocateControl
 } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import '../style/common.css'
 
 import Pins from './pins';
 import GolfInfo from './golf-info';
+import { autocompleteClasses } from '@mui/material';
 
 const TOKEN = 'pk.eyJ1IjoicnlvdGFybzIwIiwiYSI6ImNrdml2cmhtZ2Jld2kyd3Q5ZHFudzhrcGQifQ.2zjaqGum-QE9BzQYuE4zCg'
 
@@ -49,21 +51,13 @@ function Index(props) {
   const golfs = props.golfs;
   const [selectId,setSelectId] = useState();
   const [viewport, setViewport] = useState({
-    latitude: 33.566255900000010000,
-    longitude: 130.715857000000000000,
+    latitude: 34.69821725408306,
+    longitude: 135.5030768798753,
     zoom: 8,
     bearing: 0,
     pitch: 0
   });
   const [popupInfo, setPopupInfo] = useState(null);
-
-  const containerStyle = {
-    width: "90%",
-    height: "450px",
-    marginRight: "auto",
-    marginLeft: "auto",
-    boxShadow: "rgba(0, 0, 0, 0.4) 0px 30px 70px",
-  };
 
   const Content = styled.div`
     width:90%;
@@ -218,9 +212,6 @@ function Index(props) {
           <ItemStartDay>
             {golf.price}
           </ItemStartDay>
-          {/*<Hash>
-            #大豆
-          </Hash>*/}
         </div>
       </FlexBox>
       <EndLine></EndLine>
@@ -239,12 +230,13 @@ function Index(props) {
           現在は大阪限定です。
         </Subtitle>
       </Content>
-      <div>
-
+      <div className="MapStyle">
         <MapGL
           {...viewport}
-          {...containerStyle}
-          mapStyle="mapbox://styles/mapbox/dark-v9"
+          width= "100%"
+          height= "450px"
+          margin-right="100px"
+          mapStyle="mapbox://styles/mapbox/navigation-night-v1"
           onViewportChange={setViewport}
           mapboxApiAccessToken={TOKEN}
         >
