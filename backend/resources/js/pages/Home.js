@@ -39,12 +39,13 @@ function Home() {
           {load && loadGolf?
           <div className="loading" {...loadGolf?"":className="animation"}>
             <img src={golfIcon} className="loadImage"></img>
-          </div>:""}
+          </div>:
             <div className='sk-ab sk-index'>
               <div className='main'>
                 <Index golfs={golfs}/>
               </div>
             </div>
+          }
 	      </main>
       </>
     );

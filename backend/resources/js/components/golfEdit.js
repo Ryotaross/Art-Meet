@@ -15,7 +15,7 @@ import { grey } from '@mui/material/colors';
 
 function GolfEdit() {
   const googleGeocoder = null;
-  const [golf,setGolf] = useState([{id: "",name: "",address: "",price: "",courseInfo: "",phone: "",hp:"",moreInfo:"",image:""}]);
+  const [golf,setGolf] = useState({id: "",name: "",address: "",price: "",courseInfo: "",phone: "",hp:"",moreInfo:"",image:"",lat="",lng=""});
   const [image,setImage] = useState();
   const [lat,setLat] = useState();
   const [lng,setLng] = useState();
@@ -23,9 +23,10 @@ function GolfEdit() {
   const history = useHistory();
 
   useEffect(() => {
+    console.log(golf.id)
     const url = new FormData()
-    url.append("id", id);
-    axios.post('http://localhost/api/golf/search',url)
+    url.append("id", golf.id);
+    axios.post('http://localhost/api/golf/edit',url)
     .then(res => {
       setGolf(res.data);
       setImage(res.data.image);
@@ -38,7 +39,7 @@ function GolfEdit() {
   const handleEdit = () => {
     
     const file = new FormData()
-    file.append("id", id);
+    file.append("id", golf.id);
     file.append("name", golf.name);
     file.append("address", golf.address);
     file.append("price", golf.price);
@@ -86,7 +87,7 @@ function GolfEdit() {
   const handleDelete = () => {
     
     const file = new FormData()
-    file.append("id", id);
+    file.append("id", golf.id);
     axios
       .post('http://localhost/api/golf/delete',file)
       .then(response => {

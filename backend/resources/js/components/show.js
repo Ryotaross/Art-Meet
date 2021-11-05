@@ -18,10 +18,7 @@ function Show(props) {
   `
   const Gif = styled.div `
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width:100%;
-    height:500px;
+    margin:auto;
     background-color: white;
   `
   
