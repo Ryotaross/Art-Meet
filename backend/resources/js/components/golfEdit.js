@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState,useEffect  } from 'react';
 import { useParams,useHistory } from 'react-router-dom';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import axios from 'axios';
@@ -15,7 +15,7 @@ import { grey } from '@mui/material/colors';
 
 function GolfEdit() {
   const googleGeocoder = null;
-  const [golf,setGolf] = useState({id: "",name: "",address: "",price: "",courseInfo: "",phone: "",hp:"",moreInfo:"",image:"",lat="",lng=""});
+  const [golf,setGolf] = useState({id: "",name: "",address: "",price: "",courseInfo: "",phone: "",hp:"",moreInfo:"",image:"",lat:"",lng:""});
   const [image,setImage] = useState();
   const [lat,setLat] = useState();
   const [lng,setLng] = useState();
@@ -23,10 +23,9 @@ function GolfEdit() {
   const history = useHistory();
 
   useEffect(() => {
-    console.log(golf.id)
     const url = new FormData()
-    url.append("id", golf.id);
-    axios.post('http://localhost/api/golf/edit',url)
+    url.append("id", id);
+    axios.post('http://localhost/api/golf/search',url)
     .then(res => {
       setGolf(res.data);
       setImage(res.data.image);
@@ -169,13 +168,10 @@ function GolfEdit() {
           value={golf.moreInfo}
           onChange={event => setGolf({ ...golf, moreInfo: event.target.value })}
         />
-        <input accept="image/*" multiple type="file" className="input" id="upload-img" 
-        onChange={event => setImage(event.target.files)} />
         <Button variant="contained" sx={{m:1}} onClick={handleEdit}>修正</Button>
         <Button variant="contained" sx={{m:1}} onClick={handleDelete} color="error">削除</Button>
         <LoadScript googleMapsApiKey={"AIzaSyC5wGBoyJ4BGGZETLXsqmdmbadXcSPaPCM"}>
         </LoadScript>
-
       </CardContent>
     </React.Fragment>
   );

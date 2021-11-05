@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '../style/common.css'
-import MeatEdit from '../components/meatEdit';
+import GolfEdit from '../components/GolfEdit';
 
 function Edit() {
     return (
       <>
-        <MeatEdit />
+        <GolfEdit />
       </>
     );
 }
