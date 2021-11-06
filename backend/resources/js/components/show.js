@@ -5,7 +5,6 @@ import styled from "styled-components";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import golfIcon from './image/golf1_animated_300.gif';
-import LoadingInterface from './LoadingInterface';
 
 function Show(props) {
   const[golf,setGolf] = useState([{id: "",name: "",address: "",price: "",courseInfo: "",phone: "",hp:"",moreInfo:"",image:"",lat:0,lng:0}]);
@@ -14,12 +13,16 @@ function Show(props) {
 
   const DetailShow = styled.div `
     width:500px;
+    height:500px;
     margin:10px auto;
+    font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro", "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "メイリオ", sans-serif;
   `
   const Gif = styled.div `
+    position: relative;
+    text-align: center;
+    align-items: center;
     display: flex;
-    margin:auto;
-    background-color: white;
+    justify-content: center;
   `
   
   const BackArrow = styled.div`
@@ -35,7 +38,7 @@ function Show(props) {
 
   const Image = styled.img `
     width: 390px;
-    height: 100%;
+    height: 50%;
     margin: 12px 0;
     object-fit:cover;
   `;
@@ -53,7 +56,6 @@ function Show(props) {
   `;
   
   const Name = styled.p`
-    width: 264px;
     margin: 0 96px 11.8px 9px;
     font-family: 'Noto Serif JP', serif;
     font-size: 18px;
@@ -66,7 +68,6 @@ function Show(props) {
   `;
 
   const Maker = styled.p`
-    width: 351px;
     margin: 5px 0 8px 18px;
     font-family: 'Noto Serif JP', serif;
     font-size: 13px;
@@ -79,7 +80,6 @@ function Show(props) {
   `;
 
   const StartDay = styled.p`
-    width: 142px;
     margin: 5px 78px 11.8px 18px;
     font-family: 'Noto Serif JP', serif;
     font-size: 13px;
@@ -92,7 +92,6 @@ function Show(props) {
   `;
 
   const Content = styled.p `
-    width: 112px;
     margin: 5px 108px 5px 18px;
     font-family: 'Noto Serif JP', serif;
     font-size: 11px;
@@ -157,26 +156,26 @@ function Show(props) {
             {golf.address}
           </Maker>
           <StartDay>
-            {golf.price}
+            料金:{golf.price}
           </StartDay>
           <Content>
-            {golf.courseInfo}
+            コース情報:{golf.courseInfo}
           </Content>
           <Content>
             電話番号：{golf.phone}
           </Content>
           </Text>
           <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" sx={{my:5}}>
-            <Link to={golf.hp}>
+            <a href={golf.hp} target="_blank">
               <Button variant="contained" color="primary">
                 公式
               </Button>
-            </Link>
-            <Link to={golf.moreInfo}>
+            </a>
+            <a href={golf.moreInfo} target="_blank">
               <Button variant="contained" color="warning">
                 詳細情報
               </Button>
-            </Link>
+            </a>
           </Stack>
         </Rectangle6>
         </>

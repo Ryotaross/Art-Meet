@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
 import { useState,useEffect } from 'react';
-import { GoogleMap, LoadScript, InfoWindow, Marker, MapOptions,Maps  } from '@react-google-maps/api';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Show from './show';
@@ -18,7 +17,6 @@ import '../style/common.css'
 
 import Pins from './pins';
 import GolfInfo from './golf-info';
-import { autocompleteClasses } from '@mui/material';
 
 const TOKEN = 'pk.eyJ1IjoicnlvdGFybzIwIiwiYSI6ImNrdml2cmhtZ2Jld2kyd3Q5ZHFudzhrcGQifQ.2zjaqGum-QE9BzQYuE4zCg'
 
@@ -67,7 +65,7 @@ function Index(props) {
   const ArtMeat = styled.span`
     width: 131px;
     height: 50px;
-    font-family:  'Roboto', sans-serif;;
+    font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro", "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "メイリオ", sans-serif;
     font-size: 36px;
     font-weight: bold;
     font-stretch: normal;
@@ -83,7 +81,7 @@ function Index(props) {
 
   const Subtitle = styled.span `
     display:block;
-    font-family:  'Roboto', sans-serif;;
+    font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro", "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "メイリオ", sans-serif;
     font-size: 15px;
   `;
 
@@ -104,16 +102,20 @@ function Index(props) {
   const FlexBox = styled.div `
     display:flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: start;
     margin:36px auto;
   `
 
   const Bitmap = styled.img `
     width: 120px;
     height: 100%;
-    margin: 5px 6px 12px 33px;
+    margin: 5px 15px 12px 33px;
     object-fit:cover;
   `
+
+  const golfText = styled.div `
+    font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro", "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "メイリオ", sans-serif;
+    `
 
   const ItemName = styled.p`
     margin: 0 33px 5px 6px;
@@ -202,7 +204,7 @@ function Index(props) {
     <React.Fragment key={golf.id}>
       <FlexBox onClick={toggleDrawer(true,golf.id)}>
         {image(golf.image)}
-        <div>
+        <golfText>
           <ItemName>
             {golf.name}
           </ItemName>
@@ -212,7 +214,7 @@ function Index(props) {
           <ItemStartDay>
             {golf.price}
           </ItemStartDay>
-        </div>
+        </golfText>
       </FlexBox>
       <EndLine></EndLine>
     </React.Fragment>
