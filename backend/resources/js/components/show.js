@@ -13,7 +13,7 @@ function Show(props) {
 
   const DetailShow = styled.div `
     width:500px;
-    height:500px;
+    height:550px;
     margin:10px auto;
     font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro", "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "メイリオ", sans-serif;
   `
@@ -24,6 +24,10 @@ function Show(props) {
     display: flex;
     justify-content: center;
   `
+
+  const LoadingImage = styled.img `
+    margin:auto;
+    `
   
   const BackArrow = styled.div`
     width: 16px;
@@ -31,7 +35,6 @@ function Show(props) {
   `;
 
   const Back = styled.button`
-  width: 16px;
   height: 19px;
   text-align:right;
 `;
@@ -140,12 +143,12 @@ function Show(props) {
       <DetailShow>
         {load?
           <Gif>
-            <img src={golfIcon}></img>
+            <LoadingImage src={golfIcon} />
           </Gif>
         :
         <>
         <BackArrow>＜</BackArrow>
-        <Back onClick={handleClick} value={golf.id}>:</Back>
+          <Back onClick={handleClick} value={golf.id}>修正</Back>
         {image(golf.image)}
         <Rectangle6>
           <Text>

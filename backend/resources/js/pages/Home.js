@@ -4,6 +4,7 @@ import axios from 'axios';
 import ReactDOM from 'react-dom';
 import '../style/common.css'
 import Index from '../components/Index';
+import Footer from '../components/footer';
 import golfIcon from './image/golf1_animated_300.gif'
 
 function Home() {
@@ -47,6 +48,9 @@ function Home() {
             </div>
           }
 	      </main>
+        {load && loadGolf?'':
+        <Footer />
+        }
       </>
     );
 }
