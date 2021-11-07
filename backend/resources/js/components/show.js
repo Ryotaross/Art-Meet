@@ -4,7 +4,7 @@ import { Link,useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import golfIcon from './image/golf1_animated_300.gif';
+import golfIcon from './image/golf_212.gif';
 
 function Show(props) {
   const[golf,setGolf] = useState([{id: "",name: "",address: "",price: "",courseInfo: "",phone: "",hp:"",moreInfo:"",image:"",lat:0,lng:0}]);
@@ -23,11 +23,17 @@ function Show(props) {
     align-items: center;
     display: flex;
     justify-content: center;
-  `
+  `;
 
   const LoadingImage = styled.img `
-    margin:auto;
-    `
+    margin:163.5px auto;
+  `;
+
+  const InfoTop = styled.div `
+    display:flex;
+    width:95%;
+    margin:10px auto;
+  `;
   
   const BackArrow = styled.div`
     width: 16px;
@@ -35,19 +41,19 @@ function Show(props) {
   `;
 
   const Back = styled.button`
-  height: 19px;
-  text-align:right;
+    height: 19px;
+    margin-left:20px;
 `;
 
   const Image = styled.img `
-    width: 390px;
+    width: 95%;
     height: 50%;
-    margin: 12px 0;
+    margin: 12px auto;
     object-fit:cover;
   `;
 
   const Rectangle6 = styled.div `
-    width: 390px;
+    width: 100%;
     height: 257px;
     padding: 18px 0 22px 0;
     background-color: #fff;
@@ -130,14 +136,6 @@ function Show(props) {
     );
   }
 
-  const loading = () => {
-    if(load){
-      return(
-        <p></p>
-      )
-    }
-  }
-
   return(
     <>
       <DetailShow>
@@ -147,8 +145,10 @@ function Show(props) {
           </Gif>
         :
         <>
-        <BackArrow>＜</BackArrow>
+        <InfoTop>
+          <BackArrow>＜</BackArrow>
           <Back onClick={handleClick} value={golf.id}>修正</Back>
+        </InfoTop>
         {image(golf.image)}
         <Rectangle6>
           <Text>
@@ -168,7 +168,7 @@ function Show(props) {
             電話番号：{golf.phone}
           </Content>
           </Text>
-          <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" sx={{my:5}}>
+          <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" sx={{my:5,mx:'auto'}}>
             <a href={golf.hp} target="_blank">
               <Button variant="contained" color="primary">
                 公式

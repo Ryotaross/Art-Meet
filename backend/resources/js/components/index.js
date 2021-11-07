@@ -183,7 +183,6 @@ function Index(props) {
 
   const list = (id) => (
     <Box
-      sx={{ width: 390,mx:'auto'  }}
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
@@ -267,7 +266,6 @@ function Index(props) {
             anchor="bottom"
             open={show}
             onClose={toggleDrawer(false)}
-            sx={{ width: 390,mx:'auto' }}
           >
             {list(selectId)}
         </Drawer>
@@ -278,3 +276,4 @@ function Index(props) {
 }
 
 export default Index;
+
