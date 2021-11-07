@@ -40,11 +40,6 @@ function Show(props) {
     height: 19px;
   `;
 
-  const Back = styled.button`
-    height: 19px;
-    margin-left:20px;
-`;
-
   const Image = styled.img `
     width: 95%;
     height: 50%;
@@ -147,7 +142,7 @@ function Show(props) {
         <>
         <InfoTop>
           <BackArrow>＜</BackArrow>
-          <Back onClick={handleClick} value={golf.id}>修正</Back>
+          <Button variant="text" onClick={handleClick} value={golf.id} sx={{mx:5}}>修正</Button>
         </InfoTop>
         {image(golf.image)}
         <Rectangle6>

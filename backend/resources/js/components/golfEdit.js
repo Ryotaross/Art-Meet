@@ -101,7 +101,7 @@ function GolfEdit() {
   const card = (
     <React.Fragment >
       <CardMedia sx={{ width:{ xs: 400, md: 800 },height:60,m:'auto',pt:2,fontSize: 20,bgcolor:blueGrey[800],color:grey[50]}}>
-          新規作成
+          {golf.name}を修正
       </CardMedia>
       <CardContent sx={{m:'auto',width:{ xs: 400, md: 800 },border:1,borderColor: 'grey.500',boxShadow: 1,bgcolor:grey[50]}}>
         <TextField

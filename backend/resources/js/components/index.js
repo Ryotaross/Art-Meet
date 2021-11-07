@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from "styled-components";
 import { useState,useEffect } from 'react';
+import { Link } from "react-router-dom";
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Show from './show';
+import Button from '@mui/material/Button';
+import Input from '@mui/material/Input';
 import { sp,pc,vw } from '../media';
 import MapGL, {
   Popup,
@@ -17,6 +20,7 @@ import '../style/common.css'
 
 import Pins from './pins';
 import GolfInfo from './golf-info';
+import Menu from './menu';
 
 const TOKEN = 'pk.eyJ1IjoicnlvdGFybzIwIiwiYSI6ImNrdml2cmhtZ2Jld2kyd3Q5ZHFudzhrcGQifQ.2zjaqGum-QE9BzQYuE4zCg'
 
@@ -85,6 +89,7 @@ function Index(props) {
     font-size: 15px;
   `;
 
+  
   const List = styled.div `
     overflow: scroll;
     width:450px;
@@ -97,7 +102,7 @@ function Index(props) {
       border-radius: 20px;
       color: white;
     }
-  `
+  `;
 
   const FlexBox = styled.div `
     display:flex;
@@ -220,6 +225,15 @@ function Index(props) {
     )
   ) 
 
+  const Searchlat = (lat) => {
+    setViewport({ ...viewport, latitude: lat });
+  }
+
+  const Searchlng = (lng) => {
+    setViewport({ ...viewport, longitude: lng });
+    setViewport({ ...viewport, zoom: 10 });
+  }
+
   return(
     <>
       <Content>
@@ -231,6 +245,7 @@ function Index(props) {
           現在は大阪限定です。
         </Subtitle>
       </Content>
+      <Menu Searchlat={Searchlat} Searchlng={Searchlng}/>
       <div className="MapStyle">
         <MapGL
           {...viewport}
