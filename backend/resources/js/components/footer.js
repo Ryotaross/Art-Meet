@@ -17,7 +17,8 @@ function Footer(props) {
     font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro", "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "メイリオ", sans-serif;
     text-decoration: none;
     margin-left:20px;
-    justify-content: center;
+    text-align: center;
+    align-items: center;
     `
 
   return(

@@ -142,7 +142,7 @@ function Show(props) {
         <>
         <InfoTop>
           <BackArrow>＜</BackArrow>
-          <Button variant="text" onClick={handleClick} value={golf.id} sx={{mx:5}}>修正</Button>
+          <Button variant="outlined" size="small" onClick={handleClick} value={golf.id} sx={{mx:5}}>修正</Button>
         </InfoTop>
         {image(golf.image)}
         <Rectangle6>

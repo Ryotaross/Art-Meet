@@ -72,7 +72,6 @@ function Create() {
       if (status === 'OK') {
         setLat(results[0].geometry.location.lat()),
         setLng(results[0].geometry.location.lng());
-        console.log(123);
       }
     });
   }
@@ -89,7 +88,7 @@ function Create() {
           label="コース名"
           variant="standard"
           sx={{my:2}}
-          onChange={event => setGolf({ ...golf, name: event.target.value })}
+          onChange={event => {setGolf({ ...golf, name: event.target.value });geocode();}}
         />
         <TextField
           fullWidth
@@ -107,7 +106,7 @@ function Create() {
           label="料金"
           variant="standard"
           sx={{my:2}}
-          onChange={event => setGolf({ ...golf, price: event.target.value })}
+          onChange={event => {setGolf({ ...golf, price: event.target.value });geocode();}}
         />
         <TextField
           fullWidth
@@ -115,7 +114,7 @@ function Create() {
           label="コース情報"
           variant="standard"
           sx={{my:2}}
-          onChange={event => setGolf({ ...golf, courseInfo: event.target.value })}
+          onChange={event => {setGolf({ ...golf, courseInfo: event.target.value });geocode();}}
         />
         <TextField
           fullWidth
@@ -123,7 +122,7 @@ function Create() {
           label="電話番号"
           variant="standard"
           sx={{my:2}}
-          onChange={event => setGolf({ ...golf, phone: event.target.value })}
+          onChange={event => {setGolf({ ...golf, phone: event.target.value });geocode();}}
         />
         <TextField
           fullWidth
@@ -131,7 +130,7 @@ function Create() {
           label="公式ホームページ"
           variant="standard"
           sx={{my:2}}
-          onChange={event => setGolf({ ...golf, hp: event.target.value })}
+          onChange={event => {setGolf({ ...golf, hp: event.target.value });geocode();}}
         />
         <TextField
           fullWidth
@@ -139,10 +138,10 @@ function Create() {
           label="提携ホームページ"
           variant="standard"
           sx={{my:2}}
-          onChange={event => setGolf({ ...golf, moreInfo: event.target.value })}
+          onChange={event => {setGolf({ ...golf, moreInfo: event.target.value });geocode();}}
         />
         <input accept="image/*" multiple type="file" className="input" id="upload-img" 
-        onChange={event => setImage(event.target.files)} />
+        onChange={event => {setImage(event.target.files);geocode();}} />
         <Button variant="contained" sx={{m:1}} onClick={handleSubmit}>投稿</Button>
         <LoadScript googleMapsApiKey={"AIzaSyC5wGBoyJ4BGGZETLXsqmdmbadXcSPaPCM"}>
         </LoadScript>
