@@ -1,13 +1,9 @@
 import React from 'react';
-import styled from "styled-components";
-import { useState,useEffect } from 'react';
-import { Link } from "react-router-dom";
+import styled,{ keyframes } from "styled-components";
+import { useState,useRef, useCallback } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Show from './show';
-import Button from '@mui/material/Button';
-import Input from '@mui/material/Input';
-import { sp,pc,vw } from '../media';
 import MapGL, {
   Popup,
   NavigationControl,
@@ -15,12 +11,13 @@ import MapGL, {
   ScaleControl,
   GeolocateControl
 } from 'react-map-gl';
+import Geocoder from 'react-map-gl-geocoder'
 import 'mapbox-gl/dist/mapbox-gl.css';
+import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import '../style/common.css'
 
 import Pins from './pins';
 import GolfInfo from './golf-info';
-import Menu from './menu';
 
 const TOKEN = 'pk.eyJ1IjoicnlvdGFybzIwIiwiYSI6ImNrdml2cmhtZ2Jld2kyd3Q5ZHFudzhrcGQifQ.2zjaqGum-QE9BzQYuE4zCg'
 
@@ -60,10 +57,40 @@ function Index(props) {
     pitch: 0
   });
   const [popupInfo, setPopupInfo] = useState(null);
+  const mapRef = useRef();
+
+  const handleViewportChange = useCallback(
+    (newViewport) => setViewport(newViewport),
+    []
+  );
+
+  const handleGeocoderViewportChange = useCallback(
+    (newViewport) => {
+      const geocoderDefaultOverrides = { transitionDuration: 1000 };
+
+      return handleViewportChange({
+        ...newViewport,
+        ...geocoderDefaultOverrides
+      });
+    },
+    []
+  );
+
+  const ZoomIn = keyframes`
+    0% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  `;
 
   const Content = styled.div`
     width:90%;
     margin:30px auto;
+    animation: ${ZoomIn} 0.8s cubic-bezier(0.25, 1, 0.5, 1) 1 forwards;
   `;
 
   const ArtMeat = styled.span`
@@ -78,9 +105,6 @@ function Index(props) {
     letter-spacing: normal;
     text-align: center;
     color: #cfb5b5;
-    ${pc`
-      font-size: 50px;
-    `}
   `;
 
   const Subtitle = styled.span `
@@ -97,6 +121,7 @@ function Index(props) {
     margin:30px auto;
     background: white;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 70px;
+    animation: ${ZoomIn} 1s cubic-bezier(0.25, 1, 0.5, 1) 1 forwards;
     &:hover {
       cursor: pointer;
       border-radius: 20px;
@@ -117,10 +142,6 @@ function Index(props) {
     margin: 5px 15px 12px 33px;
     object-fit:cover;
   `
-
-  const golfText = styled.div `
-    font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro", "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "メイリオ", sans-serif;
-    `
 
   const ItemName = styled.p`
     margin: 0 33px 5px 6px;
@@ -225,15 +246,6 @@ function Index(props) {
     )
   ) 
 
-  const Searchlat = (lat) => {
-    setViewport({ ...viewport, latitude: lat });
-  }
-
-  const Searchlng = (lng) => {
-    setViewport({ ...viewport, longitude: lng });
-    setViewport({ ...viewport, zoom: 10 });
-  }
-
   return(
     <>
       <Content>
@@ -245,17 +257,22 @@ function Index(props) {
           現在は大阪限定です。
         </Subtitle>
       </Content>
-      <Menu Searchlat={Searchlat} Searchlng={Searchlng}/>
       <div className="MapStyle">
         <MapGL
+          ref={mapRef}
           {...viewport}
           width= "100%"
           height= "450px"
-          margin-right="100px"
-          mapStyle="mapbox://styles/mapbox/navigation-night-v1"
+          mapStyle="mapbox://styles/ryotaro20/ckvpzsb5s8j5p15qlikojnxoo"
           onViewportChange={setViewport}
           mapboxApiAccessToken={TOKEN}
         >
+          <Geocoder
+          mapRef={mapRef}
+          onViewportChange={handleGeocoderViewportChange}
+          mapboxApiAccessToken={TOKEN}
+          position="top-right"
+          />
           <Pins golf={golfs} onClick={setPopupInfo}/>
           {popupInfo && (
             <Popup

@@ -8,7 +8,6 @@ import Input from '@mui/material/Input';
 
 function Menu(props) {
   const [searchBox,setSearchBox] = useState(false);
-  const [place,setPlace] = useState([{name:""}]);
   const [lat,setLat] = useState("");
   const [lng,setLng] = useState("");
 
@@ -53,7 +52,7 @@ function Menu(props) {
 
   function geocode() {
     const geocoder = new window.google.maps.Geocoder();
-    geocoder.geocode({ address: place.name }, (results, status) => {
+    geocoder.geocode({ address: props.place.name }, (results, status) => {
       if (status === 'OK') {
         setLat(results[0].geometry.location.lat()),
         setLng(results[0].geometry.location.lng());
@@ -64,21 +63,19 @@ function Menu(props) {
     });
   }
 
-  const handleInput = (event) => {
-    event.preventDefault();
-    setPlace({ ...place, name: event.target.value });
-  };
-
   return(
     <>
       <Menu>
         <MenuItem>
           <Link to='/create'><Button variant="text" >新規登録</Button></Link>
-          {/*<Button variant="text" onClick={handleSearchBox}>マップ検索</Button>*/}
+          <Button variant="text" onClick={handleSearchBox}>マップ検索</Button>
         </MenuItem>
           {searchBox?
             <>
-            <Card SearchItem = {SearchItem} place = {place} handleInput={handleInput} geocode={geocode} />
+            <SearchItem>
+              <Input placeholder="Placeholder" sx={{mr:2}} value={props.place.name} onChange={props.handleInput} />
+              <Button variant="contained" size="small" onClick={geocode}>検索</Button>
+            </SearchItem>
             </>
           :''}
       </Menu>

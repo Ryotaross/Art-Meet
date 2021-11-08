@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
-import { Link,useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
@@ -140,42 +140,42 @@ function Show(props) {
           </Gif>
         :
         <>
-        <InfoTop>
-          <BackArrow>＜</BackArrow>
-          <Button variant="outlined" size="small" onClick={handleClick} value={golf.id} sx={{mx:5}}>修正</Button>
-        </InfoTop>
-        {image(golf.image)}
-        <Rectangle6>
-          <Text>
-          <Name>
-            {golf.name}
-          </Name>
-          <Maker>
-            {golf.address}
-          </Maker>
-          <StartDay>
-            料金:{golf.price}
-          </StartDay>
-          <Content>
-            コース情報:{golf.courseInfo}
-          </Content>
-          <Content>
-            電話番号：{golf.phone}
-          </Content>
-          </Text>
-          <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" sx={{my:5,mx:'auto'}}>
-            <a href={golf.hp} target="_blank">
-              <Button variant="contained" color="primary">
-                公式
-              </Button>
-            </a>
-            <a href={golf.moreInfo} target="_blank">
-              <Button variant="contained" color="warning">
-                詳細情報
-              </Button>
-            </a>
-          </Stack>
-        </Rectangle6>
+          <InfoTop>
+            <BackArrow>＜</BackArrow>
+            <Button variant="outlined" size="small" onClick={handleClick} value={golf.id} sx={{mx:5}}>修正</Button>
+          </InfoTop>
+          {image(golf.image)}
+          <Rectangle6>
+            <Text>
+            <Name>
+              {golf.name}
+            </Name>
+            <Maker>
+              {golf.address}
+            </Maker>
+            <StartDay>
+              料金:{golf.price}
+            </StartDay>
+            <Content>
+              コース情報:{golf.courseInfo}
+            </Content>
+            <Content>
+              電話番号：{golf.phone}
+            </Content>
+            </Text>
+            <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" sx={{my:5,mx:'auto'}}>
+              <a href={golf.hp} target="_blank">
+                <Button variant="contained" color="primary">
+                  公式
+                </Button>
+              </a>
+              <a href={golf.moreInfo} target="_blank">
+                <Button variant="contained" color="warning">
+                  詳細情報
+                </Button>
+              </a>
+            </Stack>
+          </Rectangle6>
         </>
         }
       </DetailShow>

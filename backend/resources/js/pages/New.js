@@ -2,9 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import '../style/common.css'
 import Create from '../components/create';
-import SimpleMap from '../components/test';
 
-function NewMeat() {
+function New() {
     return (
       <>
         <Create />
@@ -12,4 +11,4 @@ function NewMeat() {
     );
 }
 
-export default NewMeat;
+export default New;

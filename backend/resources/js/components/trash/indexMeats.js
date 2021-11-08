@@ -4,7 +4,7 @@ import { useState,useEffect } from 'react';
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import Show from './show';
+import Show from '../show';
 
 function IndexMeats(props) {
   const meats = props.meats;
