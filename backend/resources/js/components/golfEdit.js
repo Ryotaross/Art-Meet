@@ -1,12 +1,11 @@
 import React from 'react';
 import { useState,useEffect  } from 'react';
 import { useParams,useHistory } from 'react-router-dom';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { LoadScript } from '@react-google-maps/api';
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import TextField from '@mui/material/TextField';
-import { Alert } from '@mui/material';
 import Button from '@mui/material/Button';
 import { CardMedia } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
@@ -14,9 +13,7 @@ import { blueGrey } from '@mui/material/colors';
 import { grey } from '@mui/material/colors';
 
 function GolfEdit() {
-  const googleGeocoder = null;
   const [golf,setGolf] = useState({id: "",name: "",address: "",price: "",courseInfo: "",phone: "",hp:"",moreInfo:"",image:"",lat:"",lng:""});
-  const [image,setImage] = useState();
   const [lat,setLat] = useState();
   const [lng,setLng] = useState();
   const { id } = useParams()

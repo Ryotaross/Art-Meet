@@ -18,6 +18,8 @@ import '../style/common.css'
 
 import Pins from './pins';
 import GolfInfo from './golf-info';
+import IndexGolf from './IndexGolf';
+import TopGolf from './topGolf';
 
 const TOKEN = 'pk.eyJ1IjoicnlvdGFybzIwIiwiYSI6ImNrdml2cmhtZ2Jld2kyd3Q5ZHFudzhrcGQifQ.2zjaqGum-QE9BzQYuE4zCg'
 
@@ -76,6 +78,7 @@ function Index(props) {
     []
   );
 
+  /*
   const ZoomIn = keyframes`
     0% {
       transform: scale(0.8);
@@ -86,34 +89,8 @@ function Index(props) {
       transform: scale(1);
     }
   `;
+  */
 
-  const Content = styled.div`
-    width:90%;
-    margin:30px auto;
-    animation: ${ZoomIn} 0.8s cubic-bezier(0.25, 1, 0.5, 1) 1 forwards;
-  `;
-
-  const ArtMeat = styled.span`
-    width: 131px;
-    height: 50px;
-    font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro", "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "メイリオ", sans-serif;
-    font-size: 36px;
-    font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #cfb5b5;
-  `;
-
-  const Subtitle = styled.span `
-    display:block;
-    font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro", "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "メイリオ", sans-serif;
-    font-size: 15px;
-  `;
-
-  
   const List = styled.div `
     overflow: scroll;
     width:450px;
@@ -121,83 +98,12 @@ function Index(props) {
     margin:30px auto;
     background: white;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 70px;
-    animation: ${ZoomIn} 1s cubic-bezier(0.25, 1, 0.5, 1) 1 forwards;
     &:hover {
       cursor: pointer;
       border-radius: 20px;
       color: white;
     }
   `;
-
-  const FlexBox = styled.div `
-    display:flex;
-    flex-direction: row;
-    justify-content: start;
-    margin:36px auto;
-  `
-
-  const Bitmap = styled.img `
-    width: 120px;
-    height: 100%;
-    margin: 5px 15px 12px 33px;
-    object-fit:cover;
-  `
-
-  const ItemName = styled.p`
-    margin: 0 33px 5px 6px;
-    font-family: 'Noto Serif JP', serif;
-    font-size: 15px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.44;
-    letter-spacing: normal;
-    color: #333;
-  `
-
-  const ItemMaker = styled.p`
-    margin: 0 20px 5px 11px;
-    font-family: 'Noto Serif JP', serif;
-    font-size: 11px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.65;
-    letter-spacing: normal;
-    color: #040404;
-  `;
-
-  const ItemStartDay = styled.p`
-    margin: 0 20px 5px 11px;
-    font-family: 'Noto Serif JP', serif;
-    font-size: 11px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.65;
-    letter-spacing: normal;
-    color: #040404;
-  `;
-
-  const Hash = styled.p `
-    margin: 0 8px;
-    font-family: 'Noto Serif JP', serif;
-    font-size: 11px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #ff561b;
-  `;
-
-  const EndLine = styled.div `
-    width: 95%;
-    height: 1px;
-    margin:0 auto;
-    border: solid 1px #979797;
-  `;
-
 
   const toggleDrawer = (open,id) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -217,46 +123,9 @@ function Index(props) {
     </Box>
   );
 
-  const image = (img) => {
-    const image_path = "storage/image/" + img;
-    return(
-      <Bitmap src={image_path}/>
-    );
-  }
-
-  const IndexMeat = (
-    golfs.map((golf) => 
-    <React.Fragment key={golf.id}>
-      <FlexBox onClick={toggleDrawer(true,golf.id)}>
-        {image(golf.image)}
-        <golfText>
-          <ItemName>
-            {golf.name}
-          </ItemName>
-          <ItemMaker>
-            {golf.address}
-          </ItemMaker>
-          <ItemStartDay>
-            {golf.price}
-          </ItemStartDay>
-        </golfText>
-      </FlexBox>
-      <EndLine></EndLine>
-    </React.Fragment>
-    )
-  ) 
-
   return(
     <>
-      <Content>
-        <ArtMeat>
-          Osaka-Short-Course
-        </ArtMeat>
-        <Subtitle>
-          ショートコース情報サイトです。<br />
-          現在は大阪限定です。
-        </Subtitle>
-      </Content>
+      <TopGolf />
       <div className="MapStyle">
         <MapGL
           ref={mapRef}
@@ -293,7 +162,7 @@ function Index(props) {
         </MapGL>
       </div>
       <List>
-        {IndexMeat}
+        <IndexGolf toggleDrawer={toggleDrawer} golfs={golfs} />
         <Drawer
             anchor="bottom"
             open={show}
@@ -308,4 +177,3 @@ function Index(props) {
 }
 
 export default Index;
-
