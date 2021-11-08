@@ -21,8 +21,7 @@ function IndexGolf(props) {
 
   const ItemName = styled.p`
     margin: 0 33px 5px 6px;
-    font-family: 'Noto Serif JP', serif;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
     font-stretch: normal;
     font-style: normal;
@@ -33,8 +32,7 @@ function IndexGolf(props) {
 
   const ItemMaker = styled.p`
     margin: 0 20px 5px 11px;
-    font-family: 'Noto Serif JP', serif;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
     font-stretch: normal;
     font-style: normal;
@@ -45,26 +43,13 @@ function IndexGolf(props) {
 
   const ItemStartDay = styled.p`
     margin: 0 20px 5px 11px;
-    font-family: 'Noto Serif JP', serif;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
     font-stretch: normal;
     font-style: normal;
     line-height: 1.65;
     letter-spacing: normal;
     color: #040404;
-  `;
-
-  const Hash = styled.p `
-    margin: 0 8px;
-    font-family: 'Noto Serif JP', serif;
-    font-size: 11px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #ff561b;
   `;
 
   const EndLine = styled.div `

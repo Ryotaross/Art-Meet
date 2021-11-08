@@ -59,11 +59,10 @@ function Show(props) {
     margin-left:30px;
   `;
   
-  const Name = styled.p`
-    margin: 0 96px 11.8px 9px;
-    font-family: 'Noto Serif JP', serif;
+  const Name = styled.h1`
+    margin: 0 96px 12px 9px;
     font-size: 18px;
-    font-weight: 500;
+    font-weight: bold;
     font-stretch: normal;
     font-style: normal;
     line-height: 1.08;
@@ -72,9 +71,8 @@ function Show(props) {
   `;
 
   const Maker = styled.p`
-    margin: 5px 0 8px 18px;
-    font-family: 'Noto Serif JP', serif;
-    font-size: 13px;
+    margin: 5px 0 5px 18px;
+    font-size: 15px;
     font-weight: 500;
     font-stretch: normal;
     font-style: normal;
@@ -84,9 +82,8 @@ function Show(props) {
   `;
 
   const StartDay = styled.p`
-    margin: 5px 78px 11.8px 18px;
-    font-family: 'Noto Serif JP', serif;
-    font-size: 13px;
+    margin: 5px 78px 5px 18px;
+    font-size: 15px;
     font-weight: 500;
     font-stretch: normal;
     font-style: normal;
@@ -97,8 +94,7 @@ function Show(props) {
 
   const Content = styled.p `
     margin: 5px 108px 5px 18px;
-    font-family: 'Noto Serif JP', serif;
-    font-size: 11px;
+    font-size: 15px;
     font-weight: 500;
     font-stretch: normal;
     font-style: normal;
