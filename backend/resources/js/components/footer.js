@@ -29,7 +29,6 @@ function Footer(props) {
       <Foot>
         <List>
           <Inquiry><a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSfkZAJmwyBUD0PvWzhaW-oXuZTqJTAox-rBzBjR8UHCXaZ5pA/viewform?usp=sf_link">お問い合わせ</a></Inquiry>
-          <Inquiry><Link to='/create'>新規登録</Link></Inquiry>
         </List>
       </Foot>
     </>
