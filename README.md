@@ -35,7 +35,7 @@ http://localhost
 
 ### app container
 
-- Base image
+- Base imag
   - [php](https://hub.docker.com/_/php):8.0-fpm-bullseye
   - [composer](https://hub.docker.com/_/composer):2.1
 
